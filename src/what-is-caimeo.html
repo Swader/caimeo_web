@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is Caimeo - Technical Overview</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">CAIMEO</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="what-is-caimeo.html">What is Caimeo</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#soulshards">Soul Shards</a>
+                <a href="index.html#roadmap">Roadmap</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="technical-overview">
+            <h1>The Technical Foundation</h1>
+            <p class="subtitle">Understanding the standards that power Caimeo's autonomous AI agents</p>
+            
+            <div class="standards-grid">
+                <div class="standard-card">
+                    <h3>ERC-6220: Composable NFTs</h3>
+                    <p>The backbone of Caimeo's modular agent system. This standard enables:</p>
+                    <ul>
+                        <li>Nested NFT structures for complex agent compositions</li>
+                        <li>Dynamic equipment slots for skills and traits</li>
+                        <li>Hierarchical relationships between agent components</li>
+                    </ul>
+                </div>
+
+                <div class="standard-card">
+                    <h3>ERC-6454: Soulbound 2.0</h3>
+                    <p>Powers non-transferable core agent attributes:</p>
+                    <ul>
+                        <li>Permanent personality traits</li>
+                        <li>Learned behaviors and experiences</li>
+                        <li>Core intelligence modules</li>
+                    </ul>
+                </div>
+
+                <div class="standard-card">
+                    <h3>ERC-5773: Multi-Asset</h3>
+                    <p>Enables agent evolution and state changes:</p>
+                    <ul>
+                        <li>Seamless evolution from Soul Shard to full agent</li>
+                        <li>Multiple visual and functional states</li>
+                        <li>Progressive unlocking of capabilities</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="architecture">
+                <h2>System Architecture</h2>
+                <div class="architecture-diagram">
+                    <!-- Placeholder for architecture diagram -->
+                    <div class="placeholder-image">Architecture Diagram Coming Soon</div>
+                </div>
+                <div class="architecture-explanation">
+                    <h3>How It All Works Together</h3>
+                    <ol>
+                        <li><strong>Core Identity (ERC-6220)</strong>: Each agent is a composable NFT that can contain other NFTs in specific slots.</li>
+                        <li><strong>Brain Structure (ERC-6454)</strong>: The agent's brain is a non-transferable NFT containing core personality traits and learned behaviors.</li>
+                        <li><strong>Skill System</strong>: Tradeable skill NFTs can be equipped into available slots, allowing agents to learn from each other.</li>
+                        <li><strong>Evolution Mechanism (ERC-5773)</strong>: Agents evolve through multiple stages, from Soul Shard to fully realized AI entity.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="integration">
+                <h2>Integration Examples</h2>
+                <div class="code-example">
+                    <pre><code>// Example: Equipping a skill to an agent
+const agent = await CaimeoAgent.connect(agentId);
+await agent.equipSkill(skillNFT, "SKILL_SLOT_1");
+
+// Example: Checking if a trait is transferable
+const personalityTrait = await agent.getTrait("PERSONALITY_1");
+const isTransferable = await personalityTrait.isTransferable();
+
+// Example: Evolving an agent
+await agent.evolve("STAGE_2");</code></pre>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://twitter.com/caimeo" target="_blank">Twitter</a>
+            <a href="https://discord.gg/caimeo" target="_blank">Discord</a>
+        </div>
+        <p>© 2024 Caimeo. All rights reserved.</p>
+    </footer>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html> 
