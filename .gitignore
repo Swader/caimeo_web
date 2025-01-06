@@ -39,3 +39,13 @@ out/
 .cache/
 .temp/
 .cursorrules
+
+# Foundry
+crypto/lib/
+crypto/out/
+crypto/cache/
+crypto/.coverage_artifacts
+crypto/.coverage_cache
+crypto/.coverage_contracts
+crypto/broadcast/
+crypto/cache/
