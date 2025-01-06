@@ -1,6 +1,6 @@
 // Smooth scroll handling
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+document.querySelectorAll('a[href^="#"]').forEach((anchor: Element) => {
+    anchor.addEventListener('click', function(this: HTMLAnchorElement, e: Event) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href')!);
         if (target) {

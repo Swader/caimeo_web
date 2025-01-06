@@ -78,8 +78,32 @@ section {
 }
 
 #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
     padding: 8rem 0 4rem;
+    overflow: hidden;
+    background: url('images/hero_2.png') no-repeat center center;
+    background-size: cover;
+}
+
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.7);
+    z-index: 1;
+}
+
+#hero > * {
+    position: relative;
+    z-index: 2;
 }
 
 h1 {
@@ -147,9 +171,24 @@ h1 {
 }
 
 .shard-image {
+    position: relative;
     aspect-ratio: 1;
-    background: rgba(255, 255, 255, 0.05);
     border-radius: 1rem;
+    overflow: hidden;
+    border: 2px solid var(--primary-color);
+}
+
+.shard-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.01);
+    transition: transform 0.3s ease;
+}
+
+.shard-image:hover img {
+    transform: scale(1.05);
 }
 
 .timeline {
@@ -283,7 +322,7 @@ footer {
 /* Evolution Grid */
 .evolution-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     margin-top: 3rem;
 }
@@ -294,6 +333,7 @@ footer {
     border-radius: 1rem;
     backdrop-filter: blur(10px);
     transition: transform 0.3s ease;
+    border: 1px solid rgba(109, 40, 217, 0.2);
 }
 
 .evolution-card:hover {
@@ -311,21 +351,29 @@ footer {
 
 .use-cases-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
     margin-top: 3rem;
 }
 
 .use-case {
-    background: rgba(255, 255, 255, 0.05);
+    position: relative;
     padding: 2rem;
     border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
-    transition: transform 0.3s ease;
+    border: 1px solid rgba(109, 40, 217, 0.2);
+    transition: all 0.3s ease;
 }
 
 .use-case:hover {
     transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+.use-case .cyber-image {
+    margin-bottom: 1.5rem;
+    aspect-ratio: 16/9;
 }
 
 /* Placeholder Images */
@@ -356,4 +404,241 @@ footer {
     .code-example {
         padding: 1rem;
     }
+}
+
+/* Cyberpunk Image Styles */
+.cyber-image {
+    position: relative;
+    overflow: hidden;
+    border: 2px solid var(--primary-color);
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.cyber-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.cyber-image:hover img {
+    transform: scale(1.05);
+}
+
+/* Alternating Layout */
+.alternate-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin: 4rem 0;
+}
+
+.alternate-layout:nth-child(even) {
+    direction: rtl;
+}
+
+.alternate-layout:nth-child(even) > * {
+    direction: ltr;
+}
+
+/* Glitch Effect */
+.glitch-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.glitch-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch-image::before,
+.glitch-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    background-size: cover;
+    background-position: center;
+}
+
+.glitch-image::before {
+    transform: translateX(2px);
+    background-color: rgba(109, 40, 217, 0.3);
+    mix-blend-mode: multiply;
+}
+
+.glitch-image::after {
+    transform: translateX(-2px);
+    background-color: rgba(139, 92, 246, 0.3);
+    mix-blend-mode: multiply;
+}
+
+/* Add main content wrapper for parallax */
+.content-wrapper {
+    position: relative;
+    background-color: var(--background-color);
+    z-index: 2;
+    padding: 0 2rem;
+}
+
+.content-wrapper > section {
+    max-width: var(--max-width);
+    margin: 8rem auto;
+}
+
+@media (max-width: 768px) {
+    .content-wrapper {
+        padding: 0 1rem;
+    }
+    
+    .content-wrapper > section {
+        margin: 4rem auto;
+    }
+}
+
+/* Soul Shards Page Styles */
+.evolution-stages {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    margin: 4rem 0;
+}
+
+.stage {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(109, 40, 217, 0.2);
+    transition: all 0.3s ease;
+}
+
+.stage:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-5px);
+}
+
+.feature-list, .slot-list, .mechanics-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+.feature-list li, .slot-list li, .mechanics-list li {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.feature-list li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+}
+
+.brain-structure {
+    background: rgba(109, 40, 217, 0.1);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    margin-top: 2rem;
+}
+
+.equipment-types {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.type {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(109, 40, 217, 0.2);
+}
+
+.type h3 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.rarity-system {
+    margin: 3rem 0;
+}
+
+.rarity-list {
+    list-style: none;
+    padding: 0;
+}
+
+.rarity-list li {
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.rarity-list span {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
+    margin-right: 1rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.common {
+    background: rgba(148, 163, 184, 0.2);
+    color: #94a3b8;
+}
+
+.rare {
+    background: rgba(109, 40, 217, 0.2);
+    color: #8b5cf6;
+}
+
+.epic {
+    background: rgba(139, 92, 246, 0.3);
+    color: #a78bfa;
+}
+
+.legendary {
+    background: linear-gradient(45deg, rgba(109, 40, 217, 0.3), rgba(139, 92, 246, 0.3));
+    color: #c4b5fd;
+}
+
+.level-mechanics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    margin: 3rem 0;
+}
+
+.level-mechanics h3 {
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+}
+
+.level-mechanics ul {
+    list-style: none;
+    padding: 0;
+}
+
+.level-mechanics li {
+    margin: 0.75rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.level-mechanics li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
 } 

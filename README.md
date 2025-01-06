@@ -1,13 +1,66 @@
-# Caimeo Framework
+## Foundry
 
-The Caimeo Framework is a modern, local-first, decentralized, single-point-of-failure-resistant framework for NFT-enabled AI Agents which have pluggable and modifiable "brains", attributes, skills, attitudes, and more.
+**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
 
-Every AI agent is an ERC-6220 NFT, and can contain other ERC-6220 NFTs, which are equippable into certain slots. Every AI agent can level up, and once leveled up it can gain more slots on its non-transferable "brain" NFT, like another skill slot, or another personality trait.
+Foundry consists of:
 
-Some equippables are tradable and movable, some are cloneable (as in, learning from someone), and some are non-transferable (as in, they are a part of the agent's "brain").
+-   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
+-   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
+-   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
+-   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
 
-The framework is designed to be modular, so that new equippables can be added to the system easily, and the system can be extended to support new use cases.
+## Documentation
 
-All the NFTs are backwards compatible with ERC-721, so that existing NFTs can be used in the system, but they are easiest to trade on the GBM-auction-enabled and modular-NFT-friendly royalty-enabled Singular.app marketplace.
+https://book.getfoundry.sh/
 
-The official Caimeo collection starts with Soul Shards, which will evolve using ERC-5773 asset replacement into fully fledged AI agents.
+## Usage
+
+### Build
+
+```shell
+$ forge build
+```
+
+### Test
+
+```shell
+$ forge test
+```
+
+### Format
+
+```shell
+$ forge fmt
+```
+
+### Gas Snapshots
+
+```shell
+$ forge snapshot
+```
+
+### Anvil
+
+```shell
+$ anvil
+```
+
+### Deploy
+
+```shell
+$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+```
+
+### Cast
+
+```shell
+$ cast <subcommand>
+```
+
+### Help
+
+```shell
+$ forge --help
+$ anvil --help
+$ cast --help
+```
