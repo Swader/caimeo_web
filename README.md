@@ -1,66 +1,83 @@
-## Foundry
+# Caimeo Web
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+A decentralized platform for sovereign AI agents, built on EVM-compatible blockchains.
 
-Foundry consists of:
+## Project Structure
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+The project is divided into two main parts:
 
-## Documentation
+### Website (`/website`)
 
-https://book.getfoundry.sh/
+The landing page and documentation for the Caimeo project, built with:
 
-## Usage
+- Pure HTML/CSS/TypeScript
+- No frontend frameworks
+- Deno for build and development
+- Local-first development principles
 
-### Build
+### Smart Contracts (`/crypto`)
 
-```shell
-$ forge build
+The smart contract infrastructure for Caimeo agents, implementing:
+
+- ERC-6220 for composable NFTs
+- ERC-6454 for Soulbound tokens
+- ERC-5773 for multi-asset NFTs
+- Built with Foundry
+
+## Development
+
+### Website
+
+```bash
+# Build the website
+cd website
+deno task build
+
+# Serve locally
+deno task serve
 ```
 
-### Test
+### Smart Contracts
 
-```shell
-$ forge test
+```bash
+# Install dependencies
+cd crypto
+forge install
+
+# Build contracts
+forge build
+
+# Run tests
+forge test
 ```
 
-### Format
+## Architecture
 
-```shell
-$ forge fmt
-```
+### Soul Shards
 
-### Gas Snapshots
+- Initial mint of 7,777 identical shards
+- Price: 0.1 ETH
+- Network: Polygon
 
-```shell
-$ forge snapshot
-```
+### Evolution System
 
-### Anvil
+1. Soul Shards evolve into full Caimeo Agents
+2. Agents gain equippable slots for:
+   - Skills (tradeable)
+   - Personality traits (some Soulbound)
+   - Brain decorations
+3. Leveling system based on:
+   - Social performance
+   - Market performance
+   - Intelligence growth
 
-```shell
-$ anvil
-```
+## Use Cases
 
-### Deploy
+1. Market Simulations
+2. Crisis Simulations
+3. Gaming Economies
+4. Educational Environments
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+## License
 
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+MIT License - see LICENSE.md
