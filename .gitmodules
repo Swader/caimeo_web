@@ -1,0 +1,9 @@
+[submodule "crypto/lib/evm"]
+	path = crypto/lib/evm
+	url = https://github.com/RMRK-team/evm
+[submodule "crypto/lib/forge-std"]
+	path = crypto/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "crypto/lib/openzeppelin-contracts"]
+	path = crypto/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts

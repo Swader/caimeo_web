@@ -21,7 +21,9 @@ async function buildIt() {
         format: "esm",
         banner: { 
             js: `// @ts-nocheck\n// deno-lint-ignore-file`
-        }
+        },
+        external: ["npm:ethers@5.7.2"],
+        platform: "browser"
     }).catch((e: Error) => {
         console.error('Build failed:', e);
         Deno.exit(1);

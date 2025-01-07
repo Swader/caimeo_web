@@ -1,2 +1,2 @@
 @openzeppelin/=lib/openzeppelin-contracts/
-@rmrk-team/=lib/evm/ 
+@rmrk-team/evm-contracts/=node_modules/@rmrk-team/evm-contracts/ 
