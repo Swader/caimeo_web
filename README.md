@@ -37,47 +37,6 @@ deno task build
 deno task serve
 ```
 
-### Smart Contracts
-
-```bash
-# Install dependencies
-cd crypto
-forge install
-
-# Build contracts
-forge build
-
-# Run tests
-forge test
-```
-
-## Architecture
-
-### Soul Shards
-
-- Initial mint of 7,777 identical shards
-- Price: 0.1 ETH
-- Network: Polygon
-
-### Evolution System
-
-1. Soul Shards evolve into full Caimeo Agents
-2. Agents gain equippable slots for:
-   - Skills (tradeable)
-   - Personality traits (some Soulbound)
-   - Brain decorations
-3. Leveling system based on:
-   - Social performance
-   - Market performance
-   - Intelligence growth
-
-## Use Cases
-
-1. Market Simulations
-2. Crisis Simulations
-3. Gaming Economies
-4. Educational Environments
-
 ## License
 
 MIT License - see LICENSE.md
