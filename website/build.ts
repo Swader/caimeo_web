@@ -22,7 +22,6 @@ async function buildIt() {
         banner: { 
             js: `// @ts-nocheck\n// deno-lint-ignore-file`
         },
-        external: ["npm:ethers@5.7.2"],
         platform: "browser"
     }).catch((e: Error) => {
         console.error('Build failed:', e);
@@ -38,6 +37,7 @@ async function buildIt() {
     // Copy other static files
     await copy("./src/styles.css", "./dist/styles.css");
     await copy("./src/images", "./dist/images");
+    await copy("./src/ethers.umd.min.js", "./dist/ethers.umd.min.js");
 
     console.log('Build complete! Files written to ./dist');
     stop();

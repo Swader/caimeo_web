@@ -1,6 +1,6 @@
 import { ethers } from "hardhat";
 
-async function main() {
+export async function main() {
     // Get user address from env
     const userAddress = process.env.USER_ADDRESS;
     if (!userAddress) {

@@ -2,6 +2,8 @@ import { expect } from "chai";
 import { ethers } from "hardhat";
 import { Contract } from "ethers";
 import { SoulShard } from "../typechain-types";
+import { describe, it, before } from "mocha";
+import process from "node:process";
 
 describe("Minting Tests", function () {
     let soulShard: SoulShard;

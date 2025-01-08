@@ -10,10 +10,12 @@ import {
   RMRKEquipRenderUtils,
   RMRKRoyaltiesSplitter,
 } from '../typechain-types';
+import process from "node:process";
 
 // Use the appropriate WETH address based on network
 const POLYGON_WETH = "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619"; // Real WETH on Polygon
 let weth = POLYGON_WETH; // Default to Polygon WETH
+const signer = new ethers.Wallet(process.env.PRIVATE_KEY!, ethers.provider);
 
 async function fundUserAddress() {
   if (!isHardhatNetwork()) return;
@@ -24,11 +26,12 @@ async function fundUserAddress() {
     return;
   }
 
-  const signer = (await ethers.getSigners())[0];
+  const primeSigner = (await ethers.getSigners())[0];
+  
   const fundAmount = ethers.parseEther("10.0"); // Send 10 ETH
   
-  console.log(`Funding ${userAddress} with ${ethers.formatEther(fundAmount)} ETH...`);
-  const tx = await signer.sendTransaction({
+  console.log(`Funding ${userAddress} from ${primeSigner.address} with ${ethers.formatEther(fundAmount)} ETH...`);
+  const tx = await primeSigner.sendTransaction({
     to: userAddress,
     value: fundAmount
   });
@@ -37,7 +40,7 @@ async function fundUserAddress() {
 }
 
 export async function deployBulkWriter(): Promise<RMRKBulkWriter> {
-  const bulkWriterFactory = await ethers.getContractFactory('RMRKBulkWriter');
+  const bulkWriterFactory = await ethers.getContractFactory('RMRKBulkWriter', signer);
   const bulkWriter = await bulkWriterFactory.deploy();
   await bulkWriter.waitForDeployment();
   const bulkWriterAddress = await bulkWriter.getAddress();
@@ -48,7 +51,7 @@ export async function deployBulkWriter(): Promise<RMRKBulkWriter> {
 }
 
 export async function deployCatalogUtils(): Promise<RMRKCatalogUtils> {
-  const catalogUtilsFactory = await ethers.getContractFactory('RMRKCatalogUtils');
+  const catalogUtilsFactory = await ethers.getContractFactory('RMRKCatalogUtils', signer);
   const catalogUtils = await catalogUtilsFactory.deploy();
   await catalogUtils.waitForDeployment();
   const catalogUtilsAddress = await catalogUtils.getAddress();
@@ -59,7 +62,7 @@ export async function deployCatalogUtils(): Promise<RMRKCatalogUtils> {
 }
 
 export async function deployCollectionUtils(): Promise<RMRKCollectionUtils> {
-  const collectionUtilsFactory = await ethers.getContractFactory('RMRKCollectionUtils');
+  const collectionUtilsFactory = await ethers.getContractFactory('RMRKCollectionUtils', signer);
   const collectionUtils = await collectionUtilsFactory.deploy();
   await collectionUtils.waitForDeployment();
   const collectionUtilsAddress = await collectionUtils.getAddress();
@@ -70,7 +73,7 @@ export async function deployCollectionUtils(): Promise<RMRKCollectionUtils> {
 }
 
 export async function deployRenderUtils(): Promise<RMRKEquipRenderUtils> {
-  const renderUtilsFactory = await ethers.getContractFactory('RMRKEquipRenderUtils');
+  const renderUtilsFactory = await ethers.getContractFactory('RMRKEquipRenderUtils', signer);
   const renderUtils = await renderUtilsFactory.deploy();
   await renderUtils.waitForDeployment();
   const renderUtilsAddress = await renderUtils.getAddress();
@@ -84,7 +87,7 @@ export async function deployCatalog(
   catalogMetadataUri: string,
   catalogType: string,
 ): Promise<RMRKCatalogImpl> {
-  const catalogFactory = await ethers.getContractFactory('RMRKCatalogImpl');
+  const catalogFactory = await ethers.getContractFactory('RMRKCatalogImpl', signer);
   const catalog = await catalogFactory.deploy(catalogMetadataUri, catalogType);
   await catalog.waitForDeployment();
   const catalogAddress = await catalog.getAddress();
@@ -98,7 +101,7 @@ export async function deployRoyaltiesSplitter(
   beneficiaries: string[],
   sharesBPS: number[],
 ): Promise<RMRKRoyaltiesSplitter> {
-  const splitterFactory = await ethers.getContractFactory('RMRKRoyaltiesSplitter');
+  const splitterFactory = await ethers.getContractFactory('RMRKRoyaltiesSplitter', signer);
   const splitter = await splitterFactory.deploy(beneficiaries, sharesBPS);
   await splitter.waitForDeployment();
   const splitterAddress = await splitter.getAddress();
@@ -143,7 +146,7 @@ export async function deploySoulShard(): Promise<SoulShard> {
     weth = localWeth;
   }
 
-  const contractFactory = await ethers.getContractFactory("SoulShard");
+  const contractFactory = await ethers.getContractFactory("SoulShard", signer);
   const args = [
     "ipfs://QmUSBZxq4KpQS8MJR7ynkRLAZyGXXexeXVqqhco3pwSzh2",
     7777n,

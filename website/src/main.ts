@@ -1,4 +1,4 @@
-import { ethers } from "npm:ethers@5.7.2";
+import { ethers } from "./ethers.umd.min.js";
 
 declare global {
     interface Window {
@@ -56,7 +56,7 @@ const CONTRACT_ABI = [
     }
 ];
 
-const CONTRACT_ADDRESS = "YOUR_CONTRACT_ADDRESS"; // To be updated after deployment
+const CONTRACT_ADDRESS = "0xa5ccC3adcf29fdC16715E01d5BC32ecD32302b9a"; // To be updated after deployment
 const MAX_SUPPLY = 7777;
 
 async function updateMintProgress() {
