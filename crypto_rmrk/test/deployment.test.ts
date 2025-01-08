@@ -88,7 +88,7 @@ describe("Deployment Tests", function () {
         });
 
         it("should have correct mint price", async function () {
-            expect(await soulShard.pricePerMint()).to.equal(ethers.parseUnits("0.01", 18));
+            expect(await soulShard.pricePerMint()).to.equal(ethers.parseUnits("0.07", 18));
         });
 
         it("should have correct WETH address", async function () {

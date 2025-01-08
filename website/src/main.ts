@@ -48,23 +48,31 @@ if (mintButton) {
 // Contract ABI for totalSupply function
 const CONTRACT_ABI = [
     {
-        "inputs": [],
-        "name": "totalSupply",
-        "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
-        "stateMutability": "view",
-        "type": "function"
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "totalSupply_",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
     }
-];
+  ];
 
 const CONTRACT_ADDRESS = "0xa5ccC3adcf29fdC16715E01d5BC32ecD32302b9a"; // To be updated after deployment
 const MAX_SUPPLY = 7777;
 
 async function updateMintProgress() {
     try {
-        if (!window.ethereum) return;
+        const rpcUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+            ? 'http://127.0.0.1:8545'
+            : 'https://polygon.llamarpc.com';
 
         // Create Web3 instance
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
         const contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
 
         // Get total supply
@@ -74,7 +82,7 @@ async function updateMintProgress() {
         // Update progress bar and count
         const progressBar = document.getElementById('mint-progress');
         const mintedCount = document.getElementById('minted-count');
-        
+
         if (progressBar && mintedCount) {
             const percentage = (minted / MAX_SUPPLY) * 100;
             progressBar.style.width = `${percentage}%`;

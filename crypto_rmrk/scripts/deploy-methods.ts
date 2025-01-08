@@ -153,7 +153,7 @@ export async function deploySoulShard(): Promise<SoulShard> {
     (await ethers.getSigners())[0].address,
     500,
     "ipfs://QmY3pr6Lpjy4wcWdZ3hFXT7GZaoxLg3HFrZtkoXh1Fq5WP",
-    ethers.parseUnits("0.01", 18),
+    ethers.parseUnits("0.07", 18),
     weth
     ] as const;
   const contract: SoulShard = await contractFactory.deploy(...args);

@@ -64,7 +64,7 @@ describe("Live Tests", function () {
         it("should have correct mint price", async function() {
             const price = await soulShard.pricePerMint();
             console.log("\nMint Price:", ethers.formatEther(price), "WETH");
-            expect(price).to.equal(ethers.parseUnits("0.01", 18));
+            expect(price).to.equal(ethers.parseUnits("0.07", 18));
         });
 
         it("should use correct WETH contract", async function() {

@@ -24,6 +24,15 @@ The smart contract infrastructure for Caimeo agents, implementing:
 - ERC-5773 for multi-asset NFTs
 - Built with Foundry
 
+Build locally:
+
+- `hardhat node` (in one terminal)
+- `hardhat run scripts/deploy-weth.ts --network localhost` (in another terminal)
+- `hardhat run scripts/run-deploy.ts --network localhost` (in that same terminal)
+- `hardhat test test/livetest.ts --network localhost` (in that same terminal)
+
+You can connect to the mocked blockchain using MetaMask by connecting to `http://127.0.0.1:8545` in your wallet.
+
 ## Development
 
 ### Website
