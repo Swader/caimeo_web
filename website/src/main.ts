@@ -1,5 +1,64 @@
 import { ethers } from "./ethers.umd.min.js";
 
+// Environment-specific constants
+const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const RPC_URL = IS_LOCAL ? 'http://127.0.0.1:8545' : 'https://polygon.llamarpc.com';
+
+// WETH Configuration
+const WETH_ADDRESS = IS_LOCAL 
+  ? "0x5FbDB2315678afecb367f032d93F642f64180aa3"  // Local WETH
+  : "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619"; // Polygon WETH
+
+const WETH_ABI = [
+  "function approve(address spender, uint256 amount) external returns (bool)",
+  "function allowance(address owner, address spender) external view returns (uint256)"
+];
+
+// SoulShard Configuration
+const CONTRACT_ADDRESS = "0x49720558e787A05599af05f8090d7927237142DC";
+const MAX_SUPPLY = 7777;
+const MAX_WETH_APPROVAL = "7"; // 7 WETH max approval amount
+
+// Contract ABI
+const CONTRACT_ABI = [
+    {
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "totalSupply_",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "pricePerMint",
+      "outputs": [{"internalType": "uint256","name": "","type": "uint256"}],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {"internalType": "address","name": "to","type": "address"},
+        {"internalType": "uint256","name": "numToMint","type": "uint256"}
+      ],
+      "name": "mint",
+      "outputs": [{"internalType": "uint256","name": "","type": "uint256"}],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+];
+
+// UI Update Configuration
+const PROGRESS_UPDATE_INTERVAL = 30000; // 30 seconds
+
+// Global state
+let userAddress: string | null = null;
+
 declare global {
     interface Window {
         ethereum: any;
@@ -44,57 +103,6 @@ if (mintButton) {
         alert('Minting functionality coming soon!');
     });
 }
-
-// Contract ABI for totalSupply function
-const CONTRACT_ABI = [
-    {
-      "inputs": [],
-      "name": "totalSupply",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "totalSupply_",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "pricePerMint",
-      "outputs": [{"internalType": "uint256","name": "","type": "uint256"}],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {"internalType": "address","name": "to","type": "address"},
-        {"internalType": "uint256","name": "numToMint","type": "uint256"}
-      ],
-      "name": "mint",
-      "outputs": [{"internalType": "uint256","name": "","type": "uint256"}],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    }
-  ];
-
-const CONTRACT_ADDRESS = "0xa5ccC3adcf29fdC16715E01d5BC32ecD32302b9a"; // To be updated after deployment
-const MAX_SUPPLY = 7777;
-
-let userAddress: string | null = null;
-
-// Add these constants near the top with other constants
-const WETH_ABI = [
-  "function approve(address spender, uint256 amount) external returns (bool)",
-  "function allowance(address owner, address spender) external view returns (uint256)"
-];
-
-const POLYGON_WETH = "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619";
-const LOCAL_WETH = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-const WETH_ADDRESS = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-  ? LOCAL_WETH
-  : POLYGON_WETH;
 
 // Add this function to handle wallet connection
 async function connectWallet(): Promise<string | null> {
@@ -152,7 +160,7 @@ async function handleMint() {
         if (allowance.lt(totalCost)) {
             console.log('Requesting WETH approval...');
             // Request approval for max amount (7 WETH) to save gas on future mints
-            const maxApproval = ethers.utils.parseEther("7");
+            const maxApproval = ethers.utils.parseEther(MAX_WETH_APPROVAL);
             const approveTx = await wethContract.approve(CONTRACT_ADDRESS, maxApproval);
             await approveTx.wait();
             console.log('WETH approved');
@@ -215,12 +223,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function updateMintProgress() {
     try {
-        const rpcUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
-            ? 'http://127.0.0.1:8545'
-            : 'https://polygon.llamarpc.com';
-
         // Create Web3 instance
-        const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
+        const provider = new ethers.providers.JsonRpcProvider(RPC_URL);
         const contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
 
         // Get total supply
@@ -242,7 +246,7 @@ async function updateMintProgress() {
 }
 
 // Update progress every 30 seconds
-setInterval(updateMintProgress, 30000);
+setInterval(updateMintProgress, PROGRESS_UPDATE_INTERVAL);
 
 // Initial update
 updateMintProgress(); 
