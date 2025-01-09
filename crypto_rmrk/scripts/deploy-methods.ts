@@ -168,11 +168,11 @@ export async function deploySoulShard(): Promise<SoulShard> {
 
   const contractFactory = await ethers.getContractFactory("SoulShard", signer);
   const args = [
-    "ipfs://QmUSBZxq4KpQS8MJR7ynkRLAZyGXXexeXVqqhco3pwSzh2",
+    "ipfs://QmRAQt4xSL1F6AbZPTfE1j7KkroKjeqoEKn3Qceq7cm5jt",
     7777n,
     process.env.USER_ADDRESS,
     500,
-    "ipfs://QmY3pr6Lpjy4wcWdZ3hFXT7GZaoxLg3HFrZtkoXh1Fq5WP",
+    "ipfs://QmXwoLRu2N9zVJFAW8f6W5eo8Yf4vTXu1ecBzeZ7cjXtWW",
     ethers.parseUnits("0.07", 18),
     weth
   ] as const;
@@ -201,7 +201,7 @@ export async function deploySoulShard(): Promise<SoulShard> {
   console.log('------------------');
   console.log('Contract:', contractAddress);
   console.log('WETH:', weth);
-  console.log('Price:', ethers.utils.formatEther(args[5]), 'WETH');
+  //console.log('Price:', ethers.utils.formatEther(args[5]), 'WETH');
   console.log('Max Supply:', Number(args[1]));
   console.log('Royalty:', (Number(args[3])/100) + '%');
   console.log('Royalty Recipient:', args[2]);

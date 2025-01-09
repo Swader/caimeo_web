@@ -17,7 +17,7 @@ const WETH_ABI = [
 // SoulShard Configuration
 const CONTRACT_ADDRESS = IS_LOCAL
   ? "0xa5ccC3adcf29fdC16715E01d5BC32ecD32302b9a"  // Local SoulShard
-  : "0x49720558e787A05599af05f8090d7927237142DC"; // Polygon SoulShard
+  : "0xa5b2596Dcf404D8c23621F0F4189570a2Ce5B2ab"; // Polygon SoulShard
 
 const MAX_SUPPLY = 7777;
 const MAX_WETH_APPROVAL = "7"; // 7 WETH max approval amount

@@ -1,6 +1,19 @@
 {
     "name": "Caimeo Soul Shards",
-    "description": "Soul Shards are the genesis forms of sovereign AI agents within the Caimeo ecosystem. Each of the 7,777 shards contains unique crystalline patterns encoding latent potential for autonomous evolution. These ethereal fragments serve as the foundation for next-generation AI entities, leveraging advanced composable NFT technology to enable progressive development from pure potential to conscious digital beings. Each Shard represents the starting point of a unique journey toward artificial consciousness, with geometric patterns that will eventually evolve into dynamic energy fields and neural networks.",
+    "description": "Soul Shards are the genesis forms of sovereign AI agents within the Caimeo ecosystem. Each of the 7,777 shards contains unique crystalline patterns encoding latent potential for autonomous evolution. These ethereal fragments serve as the foundation for next-generation AI entities, leveraging advanced composable NFT technology to enable progressive development from pure potential to conscious digital beings.\n\nEach Shard represents the starting point of a unique journey toward artificial consciousness, with geometric patterns that will eventually evolve into dynamic energy fields and neural networks. Built on ERC-6220 for composability, ERC-6454 for soulbound traits, and ERC-5773 for multi-asset evolution.",
+    "mediaUri": "ipfs://QmY3pr6Lpjy4wcWdZ3hFXT7GZaoxLg3HFrZtkoXh1Fq5WP",
+    "thumbnailUri": "ipfs://QmY3pr6Lpjy4wcWdZ3hFXT7GZaoxLg3HFrZtkoXh1Fq5WP",
     "image": "ipfs://QmY3pr6Lpjy4wcWdZ3hFXT7GZaoxLg3HFrZtkoXh1Fq5WP",
-    "externalUri": "https://caimeo.com/"
-  }
+    "externalUri": "https://caimeo.com",
+    "license": "All Rights Reserved",
+    "tags": [
+        "AI",
+        "autonomous agents",
+        "evolution",
+        "composable",
+        "soulbound",
+        "digital consciousness",
+        "ethereum",
+        "polygon"
+    ]
+}

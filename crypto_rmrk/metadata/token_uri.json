@@ -1,0 +1,73 @@
+{
+    "name": "Soul Shard",
+    "description": "A crystalline ethereal shard containing latent potential for autonomous AI evolution. This genesis form exhibits unique geometric patterns that encode the foundation for future consciousness development. As part of the Caimeo ecosystem, this shard will evolve through multiple stages, gaining capabilities and forming a unique identity through interaction and learning.",
+    "image": "ipfs://QmY3pr6Lpjy4wcWdZ3hFXT7GZaoxLg3HFrZtkoXh1Fq5WP",
+    "mediaUri": "ipfs://QmY3pr6Lpjy4wcWdZ3hFXT7GZaoxLg3HFrZtkoXh1Fq5WP",
+    "thumbnailUri": "ipfs://QmY3pr6Lpjy4wcWdZ3hFXT7GZaoxLg3HFrZtkoXh1Fq5WP",
+    "externalUri": "https://caimeo.com/",
+    "external_url": "https://caimeo.com/",
+    "attributes": [
+        {
+            "label": "Evolution Stage",
+            "type": "string",
+            "value": "Genesis",
+            "trait_type": "Stage",
+            "display_type": "string"
+        },
+        {
+            "label": "Evolution Progress",
+            "type": "number",
+            "value": 1,
+            "trait_type": "Evolution Level",
+            "display_type": "number",
+            "max_value": 100
+        },
+        {
+            "label": "Consciousness Development",
+            "type": "number",
+            "value": 0,
+            "trait_type": "Consciousness Potential",
+            "display_type": "number",
+            "max_value": 100
+        },
+        {
+            "label": "Pattern Structure",
+            "type": "string",
+            "value": "Dormant",
+            "trait_type": "Pattern Complexity",
+            "display_type": "string"
+        },
+        {
+            "label": "Energy Configuration",
+            "type": "string",
+            "value": "Latent",
+            "trait_type": "Energy Signature",
+            "display_type": "string"
+        },
+        {
+            "label": "Available Equipment Slots",
+            "type": "number",
+            "value": 0,
+            "trait_type": "Equipment Slots",
+            "display_type": "number",
+            "max_value": 7
+        },
+        {
+            "label": "Core Binding Status",
+            "type": "boolean",
+            "value": true,
+            "trait_type": "Soulbound Core",
+            "display_type": "boolean"
+        }
+    ],
+    "properties": {
+        "standards": [
+            "ERC-6220",
+            "ERC-6454",
+            "ERC-5773"
+        ],
+        "evolution_enabled": true,
+        "composable": true,
+        "soulbound_core": true
+    }
+}
