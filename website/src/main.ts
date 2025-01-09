@@ -133,13 +133,47 @@ async function connectWallet(): Promise<string | null> {
     }
 }
 
+// Add these helper functions at the top
+function setMintButtonLoading(isLoading: boolean) {
+    const mintButton = document.getElementById('mint-button');
+    if (mintButton) {
+        if (isLoading) {
+            mintButton.classList.add('loading');
+            mintButton.textContent = 'Processing...';
+            mintButton.setAttribute('disabled', 'true');
+        } else {
+            mintButton.classList.remove('loading');
+            mintButton.textContent = 'Mint Soul Shard';
+            mintButton.removeAttribute('disabled');
+        }
+    }
+}
+
+function showTransactionStatus(message: string, isError = false) {
+    const statusDiv = document.createElement('div');
+    statusDiv.className = `transaction-status ${isError ? 'error' : 'success'}`;
+    statusDiv.textContent = message;
+    
+    // Remove any existing status messages
+    document.querySelectorAll('.transaction-status').forEach(el => el.remove());
+    
+    // Add new status message
+    const mintControls = document.querySelector('.mint-controls');
+    if (mintControls) {
+        mintControls.appendChild(statusDiv);
+        // Remove after 5 seconds
+        setTimeout(() => statusDiv.remove(), 5000);
+    }
+}
+
 // Update the handleMint function
 async function handleMint() {
+    setMintButtonLoading(true);
     try {
         if (!userAddress) {
             const address = await connectWallet();
             if (!address) {
-                console.log('Failed to connect wallet');
+                showTransactionStatus('Failed to connect wallet', true);
                 return;
             }
         }
@@ -161,34 +195,34 @@ async function handleMint() {
         
         // Only request approval if current allowance is less than needed
         if (allowance.lt(totalCost)) {
-            console.log('Requesting WETH approval...');
+            showTransactionStatus('Requesting WETH approval...');
             // Request approval for max amount (7 WETH) to save gas on future mints
             const maxApproval = ethers.utils.parseEther(MAX_WETH_APPROVAL);
             const approveTx = await wethContract.approve(CONTRACT_ADDRESS, maxApproval);
+            showTransactionStatus('Confirming WETH approval...');
             await approveTx.wait();
-            console.log('WETH approved');
-        } else {
-            console.log('Sufficient WETH already approved');
+            showTransactionStatus('WETH approved!');
         }
 
-        console.log(`Minting ${mintAmount} Soul Shard(s) for ${ethers.utils.formatEther(totalCost)} WETH`);
-
-        // Execute mint
+        showTransactionStatus(`Minting ${mintAmount} Soul Shard(s)...`);
         const mintTx = await contract.mint(userAddress, mintAmount);
-        const receipt = await mintTx.wait();
+        showTransactionStatus('Confirming transaction...');
+        await mintTx.wait();
         
-        console.log('Mint successful!', receipt);
-        
-        // Update the progress bar
+        showTransactionStatus('Mint successful!');
         updateMintProgress();
 
     } catch (error) {
         console.error('Error during minting:', error);
         if (error.code === 4001) {
-            console.log('User rejected the transaction');
+            showTransactionStatus('Transaction cancelled', true);
         } else if (error.code === -32603) {
-            console.log('Internal JSON-RPC error. Check if you have enough WETH balance');
+            showTransactionStatus('Insufficient WETH balance', true);
+        } else {
+            showTransactionStatus('Transaction failed', true);
         }
+    } finally {
+        setMintButtonLoading(false);
     }
 }
 

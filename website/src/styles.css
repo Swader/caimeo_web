@@ -1224,4 +1224,59 @@ li {
     .menu-overlay.active {
         display: block;
     }
+}
+
+/* Transaction status styles */
+.transaction-status {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    text-align: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.transaction-status.success {
+    background: rgba(72, 187, 120, 0.1);
+    color: #48bb78;
+    border: 1px solid rgba(72, 187, 120, 0.2);
+}
+
+.transaction-status.error {
+    background: rgba(245, 101, 101, 0.1);
+    color: #f56565;
+    border: 1px solid rgba(245, 101, 101, 0.2);
+}
+
+/* Loading button styles */
+.button.loading {
+    position: relative;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.button.loading::after {
+    content: '';
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
+/* Disabled button styles */
+.button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.8;
 } 
