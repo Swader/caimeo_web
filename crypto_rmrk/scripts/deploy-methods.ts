@@ -1,6 +1,6 @@
 import { ethers, run, network } from 'hardhat';
 import { SoulShard } from '../typechain-types';
-import { getRegistry } from './get-registry';
+// import { getRegistry } from './get-registry';
 import { delay, isHardhatNetwork } from './utils';
 import {
   RMRKBulkWriter,
@@ -11,6 +11,7 @@ import {
   RMRKRoyaltiesSplitter,
 } from '../typechain-types';
 import process from "node:process";
+import { verifyContract } from './verify-contract';
 
 // Use the appropriate WETH address based on network
 const POLYGON_WETH = "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619"; // Real WETH on Polygon
@@ -18,7 +19,10 @@ let weth = POLYGON_WETH; // Default to Polygon WETH
 const signer = new ethers.Wallet(process.env.PRIVATE_KEY!, ethers.provider);
 
 async function fundUserAddress() {
-  if (!isHardhatNetwork()) return;
+  if (!isHardhatNetwork()) {
+    console.log("Not on hardhat network, skipping funding");
+    return;
+  }
   
   const userAddress = process.env.USER_ADDRESS;
   if (!userAddress) {
@@ -131,9 +135,25 @@ async function verifyIfNotHardhat(contractAddress: string, args: any[] = []) {
   }
 }
 
-export async function deploySoulShard(): Promise<SoulShard> {
-  console.log(`Deploying SoulShard to ${network.name} blockchain...`);
+function validateEnvironment() {
+  const required = ['PRIVATE_KEY', 'POLYGONSCAN_API_KEY', 'USER_ADDRESS'];
+  for (const var_ of required) {
+    if (!process.env[var_]) {
+      throw new Error(`Missing required environment variable: ${var_}`);
+    }
+  }
+}
 
+export async function deploySoulShard(): Promise<SoulShard> {
+  validateEnvironment();
+  
+  if (network.name !== 'polygon' && !isHardhatNetwork()) {
+    throw new Error(`Invalid network ${network.name}. Use polygon or hardhat.`);
+  }
+
+  console.log(`Deploying SoulShard to ${network.name} blockchain...`);
+  console.log('Using WETH address:', weth);
+  
   // Fund user address first if we're on local network
   if (isHardhatNetwork()) {
     await fundUserAddress();
@@ -150,12 +170,13 @@ export async function deploySoulShard(): Promise<SoulShard> {
   const args = [
     "ipfs://QmUSBZxq4KpQS8MJR7ynkRLAZyGXXexeXVqqhco3pwSzh2",
     7777n,
-    (await ethers.getSigners())[0].address,
+    process.env.USER_ADDRESS,
     500,
     "ipfs://QmY3pr6Lpjy4wcWdZ3hFXT7GZaoxLg3HFrZtkoXh1Fq5WP",
     ethers.parseUnits("0.07", 18),
     weth
-    ] as const;
+  ] as const;
+
   const contract: SoulShard = await contractFactory.deploy(...args);
   await contract.waitForDeployment();
   const contractAddress = await contract.getAddress();
@@ -164,16 +185,26 @@ export async function deploySoulShard(): Promise<SoulShard> {
   if (!isHardhatNetwork()) {
     console.log('Waiting 10 seconds before verifying contract...')
     await delay(10000);
-    await run('verify:verify', {
+    await verifyContract({
       address: contractAddress,
-      constructorArguments: args,
-      contract: 'contracts/SoulShard.sol:SoulShard',
+      constructorArgs: args,
+      contract: 'contracts/Shard.sol:SoulShard'
     });
 
     // Only do on testing, or if whitelisted for production
-    const registry = await getRegistry();
-    await registry.addExternalCollection(contractAddress, args[0]);
-    console.log('Collection added to Singular Registry');
+    // const registry = await getRegistry();
+    // await registry.addExternalCollection(contractAddress, args[0]);
+    // console.log('Collection added to Singular Registry');
   }
+
+  console.log('Deployment Summary:');
+  console.log('------------------');
+  console.log('Contract:', contractAddress);
+  console.log('WETH:', weth);
+  console.log('Price:', ethers.utils.formatEther(args[5]), 'WETH');
+  console.log('Max Supply:', Number(args[1]));
+  console.log('Royalty:', (Number(args[3])/100) + '%');
+  console.log('Royalty Recipient:', args[2]);
+  
   return contract;
 }

@@ -118,4 +118,49 @@ describe("Minting Tests", function () {
             expect(actualBalance).to.equal(expectedBalance);
         });
     });
+
+    describe("Withdrawal", function () {
+        it("should allow owner to withdraw collected WETH", async function () {
+            // Get owner's initial WETH balance
+            const ownerAddress = process.env.USER_ADDRESS!;
+            const initialBalance = await weth.balanceOf(ownerAddress);
+            
+            // Calculate expected collected amount (6 mints * 0.07 WETH)
+            const mintPrice = await soulShard.pricePerMint();
+            const totalMinted = 6n;
+            const expectedCollected = mintPrice * totalMinted;
+            
+            // Execute withdrawal
+            const signer = new ethers.Wallet(process.env.PRIVATE_KEY!, ethers.provider);
+            const tx = await soulShard.connect(signer).withdrawRaisedERC20(
+                weth.target,
+                ownerAddress,
+                expectedCollected
+            );
+            await tx.wait();
+            
+            // Verify balance increased
+            const finalBalance = await weth.balanceOf(ownerAddress);
+            expect(finalBalance).to.equal(initialBalance + expectedCollected);
+        });
+
+        it("should not allow non-owner to withdraw", async function () {
+            // Create a random wallet to act as non-owner
+            const nonOwner = ethers.Wallet.createRandom().connect(ethers.provider);
+            
+            // Try to withdraw as non-owner
+            await expect(
+                soulShard.connect(nonOwner).withdrawRaisedERC20(
+                    weth.target,
+                    nonOwner.address,
+                    ethers.parseUnits("0.07", 18)
+                )
+            ).to.be.reverted;
+        });
+
+        it("should have zero WETH balance in contract after withdrawal", async function () {
+            const contractBalance = await weth.balanceOf(soulShard.target);
+            expect(contractBalance).to.equal(0n);
+        });
+    });
 }); 

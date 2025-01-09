@@ -49,3 +49,5 @@ crypto/.coverage_cache
 crypto/.coverage_contracts
 crypto/broadcast/
 crypto/cache/
+
+keypair/

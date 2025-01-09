@@ -110,4 +110,59 @@ describe("Live Tests", function () {
             console.log("\nUser NFT Balance:", balance.toString(), "SoulShards");
         });
     });
+
+    describe("Withdrawal Functionality", function() {
+        it("should show correct contract WETH balance", async function() {
+            const balance = await weth.balanceOf(soulShard.target);
+            console.log("\nContract WETH Balance:", ethers.formatEther(balance), "WETH");
+        });
+
+        it("should allow owner to withdraw if balance exists", async function() {
+            const contractBalance = await weth.balanceOf(soulShard.target);
+            if (contractBalance > 0n) {
+                const ownerAddress = process.env.USER_ADDRESS!;
+                const initialOwnerBalance = await weth.balanceOf(ownerAddress);
+                
+                // Withdraw all WETH
+                const signer = new ethers.Wallet(process.env.PRIVATE_KEY!, ethers.provider);
+                const tx = await soulShard.connect(signer).withdrawRaisedERC20(
+                    weth.target,
+                    ownerAddress,
+                    contractBalance
+                );
+                await tx.wait();
+                
+                // Verify withdrawal
+                const finalOwnerBalance = await weth.balanceOf(ownerAddress);
+                const finalContractBalance = await weth.balanceOf(soulShard.target);
+                
+                console.log("\nWithdrawal Results:");
+                console.log("Amount Withdrawn:", ethers.formatEther(contractBalance), "WETH");
+                console.log("Owner Balance Change:", 
+                    ethers.formatEther(finalOwnerBalance - initialOwnerBalance), "WETH");
+                console.log("Final Contract Balance:", 
+                    ethers.formatEther(finalContractBalance), "WETH");
+                
+                expect(finalContractBalance).to.equal(0n);
+                expect(finalOwnerBalance).to.equal(initialOwnerBalance + contractBalance);
+            } else {
+                console.log("\nNo WETH balance to withdraw");
+            }
+        });
+
+        it("should prevent non-owner withdrawal attempts", async function() {
+            // Create a random wallet to act as non-owner
+            const nonOwner = ethers.Wallet.createRandom().connect(ethers.provider);
+            
+            await expect(
+                soulShard.connect(nonOwner).withdrawRaisedERC20(
+                    weth.target,
+                    nonOwner.address,
+                    ethers.parseUnits("0.01", 18)
+                )
+            ).to.be.reverted;
+            
+            console.log("\nNon-owner withdrawal correctly prevented");
+        });
+    });
 }); 
