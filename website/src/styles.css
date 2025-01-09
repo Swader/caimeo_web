@@ -65,6 +65,7 @@ main {
 
 section {
     margin: 6rem 0;
+    padding: 2rem 0;
     opacity: 0;
     transform: translateY(20px);
     animation: fadeIn 0.6s ease forwards;
@@ -107,11 +108,36 @@ section {
 }
 
 h1 {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    font-size: 3.5rem;
+    margin-top: 3rem;
+    background: linear-gradient(135deg, #9D7EFF, #BCA5FF);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(157, 126, 255, 0.3);
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #9D7EFF, transparent);
+}
+
+h3 {
+    font-size: 1.8rem;
+    margin-top: 2.5rem;
+    color: #BCA5FF;
 }
 
 .subtitle {
@@ -120,28 +146,91 @@ h1 {
     margin-bottom: 2rem;
 }
 
+/* Base button styles */
 .button {
     display: inline-block;
     padding: 1rem 2rem;
-    border-radius: 0.5rem;
+    border-radius: 8px;
     text-decoration: none;
-    font-weight: bold;
-    transition: transform 0.3s ease;
-    margin: 0 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin: 0.5rem;
+    border: none;
+    cursor: pointer;
+    text-align: center;
 }
 
-.button:hover {
-    transform: translateY(-2px);
-}
-
-.primary {
-    background: var(--primary-color);
+/* Primary button style (Mint button) */
+.button.primary {
+    background: linear-gradient(135deg, #9c27b0, #673ab7);
     color: white;
+    box-shadow: 0 0 20px rgba(156, 39, 176, 0.3);
 }
 
-.secondary {
-    border: 2px solid var(--primary-color);
-    color: var(--text-color);
+.button.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(156, 39, 176, 0.5);
+}
+
+.button.primary:active {
+    transform: translateY(0);
+}
+
+/* Secondary button style (Learn More button) */
+.button.secondary {
+    background: transparent;
+    color: #BCA5FF;
+    border: 2px solid #9D7EFF;
+    box-shadow: 0 0 20px rgba(157, 126, 255, 0.1);
+}
+
+.button.secondary:hover {
+    background: rgba(157, 126, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(157, 126, 255, 0.2);
+    text-decoration: none;
+}
+
+.button.secondary:active {
+    transform: translateY(0);
+}
+
+/* Fix mint controls layout */
+.mint-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+/* Ensure consistent button width in mint section */
+#mint-button {
+    min-width: 200px;
+}
+
+/* Fix learn more section */
+.learn-more {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.learn-more .button {
+    width: auto;
+    min-width: 300px;
+    max-width: 100%;
+    display: inline-block;
+    padding-bottom: 1rem;
+}
+
+/* Remove old conflicting styles */
+.mint-button {
+    /* Remove these styles as they're now handled by .button.primary */
+    all: unset;
+    /* Preserve only these properties */
+    cursor: pointer;
+    display: inline-block;
 }
 
 .features {
@@ -192,28 +281,150 @@ h1 {
     transform: scale(1.05);
 }
 
+/* Roadmap Section Styling */
 .timeline {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
-    margin-top: 3rem;
-}
-
-.phase {
-    padding: 2rem;
-    border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.05);
+    margin: 4rem auto;
+    max-width: 800px;
     position: relative;
+    padding: 2rem 0;
 }
 
-.phase::before {
+/* Vertical connecting line */
+.timeline::before {
     content: '';
     position: absolute;
-    left: -1rem;
-    top: 50%;
-    width: 0.5rem;
-    height: 0.5rem;
-    background: var(--accent-color);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, 
+        transparent,
+        #9D7EFF 10%,
+        #9D7EFF 90%,
+        transparent
+    );
+    z-index: 0;
+}
+
+/* Phase styling */
+.phase {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+    width: 100%;
+    min-height: 150px;
+}
+
+/* Alternating layout */
+.phase:nth-child(odd) {
+    flex-direction: row-reverse;
+}
+
+/* Phase content container */
+.phase-content {
+    width: 45%;
+    padding: 2rem;
+    background: rgba(157, 126, 255, 0.1);
+    border: 1px solid rgba(157, 126, 255, 0.2);
+    border-radius: 12px;
+    position: relative;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    z-index: 2;
+    background-color: rgba(15, 23, 42, 0.95);
+}
+
+.phase-content:hover {
+    transform: translateY(-5px);
+    background: rgba(157, 126, 255, 0.15);
+    box-shadow: 0 0 30px rgba(157, 126, 255, 0.1);
+}
+
+/* Phase number circle */
+.phase-number {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #9c27b0, #673ab7);
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 0 20px rgba(156, 39, 176, 0.3);
+}
+
+/* Phase content styling */
+.phase-content h3 {
+    color: #BCA5FF;
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+}
+
+.phase-content p {
+    color: #E0E0E0;
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Connecting lines from circle to content */
+.phase::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: calc(5% - 30px);
+    height: 2px;
+    background: linear-gradient(to right, #9D7EFF, transparent);
+}
+
+.phase:nth-child(odd)::after {
+    left: 55%;
+    background: linear-gradient(to left, #9D7EFF, transparent);
+}
+
+.phase:nth-child(even)::after {
+    right: 55%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .timeline {
+        padding-left: 2rem;
+    }
+
+    .timeline::before {
+        left: 30px;
+    }
+
+    .phase, .phase:nth-child(odd) {
+        flex-direction: row;
+    }
+
+    .phase-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+    }
+
+    .phase-content {
+        width: calc(100% - 60px);
+        margin-left: 20px;
+    }
+
+    .phase::after {
+        width: 20px;
+        left: 30px !important;
+    }
 }
 
 footer {
@@ -740,4 +951,109 @@ footer {
 
 .mint-button:active {
     transform: translateY(0);
+}
+
+/* Improve link contrast and visibility */
+a {
+    color: #9D7EFF; /* Brighter purple for better contrast */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #BCA5FF; /* Even brighter on hover */
+    text-decoration: underline;
+}
+
+/* Special styling for footer links */
+footer .social-links a {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+footer .social-links a:hover {
+    opacity: 1;
+}
+
+/* Improve heading spacing and design */
+h1, h2, h3, h4, h5, h6 {
+    margin: 2rem 0 1.5rem;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+}
+
+/* Improve section spacing */
+section {
+    margin: 6rem 0;
+    padding: 2rem 0;
+}
+
+/* Improve list readability */
+ul, ol {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+}
+
+li {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+}
+
+/* Special styling for feature lists */
+.feature-list li {
+    color: #E0E0E0; /* Brighter text for better readability */
+    margin: 1rem 0;
+}
+
+/* Improve mint section contrast */
+.shard-details ul li {
+    color: #E0E0E0;
+    margin: 1rem 0;
+}
+
+.shard-details a {
+    color: #BCA5FF;
+    border-bottom: 1px solid rgba(188, 165, 255, 0.3);
+    padding-bottom: 2px;
+}
+
+.shard-details a:hover {
+    border-bottom-color: #BCA5FF;
+    text-decoration: none;
+}
+
+/* Improve evolution cards contrast */
+.evolution-card h3 {
+    margin-top: 1.5rem;
+    color: #BCA5FF;
+}
+
+.evolution-card p {
+    color: #E0E0E0;
+    line-height: 1.6;
+}
+
+/* Improve use cases section */
+.use-case h3 {
+    margin-top: 2rem;
+    color: #BCA5FF;
+}
+
+.use-case h4 {
+    color: #9D7EFF;
+    margin: 1.5rem 0 1rem;
+}
+
+.use-cases-list li {
+    color: #E0E0E0;
+}
+
+/* Improve roadmap section */
+.timeline .phase h3 {
+    color: #BCA5FF;
+    margin: 1rem 0;
+}
+
+.timeline .phase p {
+    color: #E0E0E0;
 } 
