@@ -5,6 +5,9 @@
     --text-color: #e2e8f0;
     --accent-color: #8b5cf6;
     --max-width: 1200px;
+    --card-bg: rgba(15, 23, 42, 0.5);
+    --border-accent: rgba(157, 126, 255, 0.2);
+    --hover-bg: rgba(157, 126, 255, 0.1);
 }
 
 * {
@@ -874,26 +877,31 @@ footer {
 }
 
 .level-mechanics {
-    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 3rem;
-    margin: 3rem 0;
+    gap: 2rem;
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(157, 126, 255, 0.2);
+    border-radius: 12px;
+    padding: 2rem;
 }
 
 .level-mechanics h3 {
     color: var(--accent-color);
-    margin-bottom: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
 }
 
 .level-mechanics ul {
-    list-style: none;
+    list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 .level-mechanics li {
-    margin: 0.75rem 0;
+    margin: 0.8rem 0;
     padding-left: 1.5rem;
     position: relative;
+    color: #e2e8f0;
 }
 
 .level-mechanics li::before {
@@ -1027,12 +1035,6 @@ h1, h2, h3, h4, h5, h6 {
     margin: 2rem 0 1.5rem;
     line-height: 1.3;
     letter-spacing: 0.02em;
-}
-
-/* Improve section spacing */
-section {
-    margin: 6rem 0;
-    padding: 2rem 0;
 }
 
 /* Improve list readability */
@@ -1279,4 +1281,248 @@ li {
 .button[disabled] {
     cursor: not-allowed;
     opacity: 0.8;
+}
+
+/* Integration cards styling */
+.integration-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.integration-card {
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(157, 126, 255, 0.2);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.integration-card:hover {
+    transform: translateY(-5px);
+}
+
+.integration-logo {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(157, 126, 255, 0.1);
+    border-radius: 50%;
+}
+
+.integration-logo img {
+    max-width: 80%;
+    height: auto;
+}
+
+.integration-card h3 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.integration-card ul {
+    margin-top: 1rem;
+    list-style-type: none;
+}
+
+.integration-card ul li {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.integration-card ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+}
+
+/* Integration showcase styling */
+.integration-showcase {
+    margin: 6rem 0;
+}
+
+.showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.showcase-card {
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(157, 126, 255, 0.2);
+    border-radius: 12px;
+    padding: 2.5rem;
+    transition: transform 0.3s ease;
+}
+
+.showcase-card:hover {
+    transform: translateY(-5px);
+}
+
+.showcase-card h3 {
+    color: var(--accent-color);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.story-intro {
+    color: #94a3b8;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.user-story ul {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+}
+
+.user-story ul li {
+    color: #e2e8f0;
+    margin: 0.8rem 0;
+    line-height: 1.5;
+}
+
+.example-scenario {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(157, 126, 255, 0.1);
+    border-radius: 8px;
+}
+
+.example-scenario h4 {
+    color: #BCA5FF;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.example-scenario ol {
+    padding-left: 1.5rem;
+}
+
+.example-scenario ol li {
+    color: #e2e8f0;
+    margin: 0.6rem 0;
+}
+
+/* Execution contexts styling */
+.context-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.context-card {
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(157, 126, 255, 0.2);
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.use-case {
+    margin-bottom: 6rem;
+}
+
+.simulation-overview,
+.environment-overview {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.simulation-map,
+.classroom-map {
+    aspect-ratio: 4/3;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(157, 126, 255, 0.3);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+.map-placeholder {
+    color: #94a3b8;
+    font-size: 1.2rem;
+}
+
+.coming-soon {
+    display: block;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    color: var(--accent-color);
+}
+
+.agent-stats {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(157, 126, 255, 0.2);
+    border-radius: 8px;
+}
+
+@media (max-width: 1200px) {
+    .simulation-overview,
+    .environment-overview {
+        grid-template-columns: 1fr;
+    }
+    
+    .simulation-interface {
+        order: -1;
+    }
+}
+
+/* Leveling System styling */
+#leveling {
+    margin-top: 2rem;
+}
+
+.level-mechanics {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(157, 126, 255, 0.2);
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.level-mechanics h3 {
+    color: var(--accent-color);
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.level-mechanics ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.level-mechanics li {
+    margin: 0.8rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: #e2e8f0;
+}
+
+.level-mechanics li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+}
+
+/* Equipment system adjustments */
+#equipment-system {
+    margin-bottom: 3rem;
 } 
