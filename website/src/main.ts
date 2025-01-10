@@ -115,28 +115,50 @@ if (mintButton) {
     });
 }
 
-// Add this function to handle wallet connection
+// Add new constants at the top with other constants
+const WALLET_TYPE = {
+    PHANTOM: 'phantom',
+    METAMASK: 'metamask'
+};
+
+// Update the connectWallet function
 async function connectWallet(): Promise<string | null> {
     try {
-        if (!window.ethereum) {
-            alert('Please install MetaMask to mint Soul Shards!');
-            return null;
+        // Check for Phantom first
+        if ('phantom' in window) {
+            const provider = window.phantom?.ethereum;
+            if (provider?.isPhantom) {
+                const accounts = await provider.request({ method: "eth_requestAccounts" });
+                if (accounts.length > 0) {
+                    userAddress = accounts[0];
+                    console.log('Connected to Phantom:', userAddress);
+                    return userAddress;
+                }
+            }
+        }
+        
+        // Fall back to MetaMask/other wallets
+        if (window.ethereum) {
+            const provider = new ethers.BrowserProvider(window.ethereum);
+            const accounts = await provider.send("eth_requestAccounts", []);
+            
+            if (accounts.length > 0) {
+                userAddress = accounts[0];
+                console.log('Connected to MetaMask:', userAddress);
+                return userAddress;
+            }
         }
 
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        
-        // Request account access
-        const accounts = await provider.send("eth_requestAccounts", []);
-        
-        if (accounts.length > 0) {
-            userAddress = accounts[0];
-            console.log('Connected wallet:', userAddress);
-            return userAddress;
-        }
-        
+        alert('Please install MetaMask or Phantom to mint Soul Shards!');
         return null;
     } catch (error) {
         console.error('Error connecting wallet:', error);
+        // Handle Phantom-specific error codes
+        if (error.code === 4001) {
+            showTransactionStatus('Connection rejected by user', true);
+        } else {
+            showTransactionStatus('Failed to connect wallet', true);
+        }
         return null;
     }
 }
@@ -186,7 +208,16 @@ async function handleMint() {
             }
         }
 
-        const provider = new ethers.BrowserProvider(window.ethereum);
+        // Get the correct provider
+        const ethereumProvider = window.phantom?.ethereum?.isPhantom 
+            ? window.phantom.ethereum 
+            : window.ethereum;
+            
+        if (!ethereumProvider) {
+            throw new Error('No wallet provider found');
+        }
+
+        const provider = new ethers.BrowserProvider(ethereumProvider);
         const signer = await provider.getSigner();
         const mintAmount = Number((document.getElementById('mint-amount') as HTMLSelectElement).value);
         
@@ -241,10 +272,10 @@ document.addEventListener('DOMContentLoaded', () => {
         mintButton.addEventListener('click', handleMint);
     }
 
-    // Check if already connected
-    if (window.ethereum) {
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        provider.send("eth_accounts", [])
+    // Check for both wallet types
+    if (window.phantom?.ethereum || window.ethereum) {
+        const provider = window.phantom?.ethereum || window.ethereum;
+        provider.request({ method: "eth_accounts" })
             .then(accounts => {
                 if (accounts.length > 0) {
                     userAddress = accounts[0];
@@ -254,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(console.error);
 
         // Listen for account changes
-        window.ethereum.on('accountsChanged', (accounts: string[]) => {
+        provider.on('accountsChanged', (accounts: string[]) => {
             if (accounts.length > 0) {
                 userAddress = accounts[0];
                 console.log('Account changed:', userAddress);
@@ -329,3 +360,4 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = '';
     });
 }); 
+
