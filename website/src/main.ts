@@ -65,7 +65,7 @@ const CONTRACT_ABI = [
 ];
 
 // UI Update Configuration
-const PROGRESS_UPDATE_INTERVAL = 30000; // 30 seconds
+const PROGRESS_UPDATE_INTERVAL = 300000; // 5 minutes
 
 // Global state
 let userAddress: string | null = null;
