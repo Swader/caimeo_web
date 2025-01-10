@@ -2,7 +2,15 @@ import { ethers } from "./ethers.umd.min.js";
 
 // Environment-specific constants
 const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-const RPC_URL = IS_LOCAL ? 'http://127.0.0.1:8545' : 'https://polygon.llamarpc.com';
+const POLYGON_RPC_URLS = [
+    'https://polygon.llamarpc.com',
+    'https://polygon.rpc.subquery.network/public',
+    'https://polygon.drpc.org',
+    'https://polygon.meowrpc.com',
+    'https://polygon-rpc.com', 
+    'https://1rpc.io/matic'
+];
+const RPC_URL = IS_LOCAL ? 'http://127.0.0.1:8545' : POLYGON_RPC_URLS[Math.floor(Math.random() * POLYGON_RPC_URLS.length)];
 
 // WETH Configuration
 const WETH_ADDRESS = IS_LOCAL 
