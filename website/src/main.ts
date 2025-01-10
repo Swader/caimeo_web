@@ -6,7 +6,6 @@ const POLYGON_RPC_URLS = [
     'https://polygon.llamarpc.com',
     'https://polygon.rpc.subquery.network/public',
     'https://polygon.drpc.org',
-    'https://polygon.meowrpc.com',
     'https://polygon-rpc.com', 
     'https://1rpc.io/matic'
 ];
