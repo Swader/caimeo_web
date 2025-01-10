@@ -1750,3 +1750,123 @@ li
 		flex-direction: column;
 	}
 }
+
+.project-context {
+	background: rgba(157, 126, 255, 0.1);
+	border-radius: 12px;
+	padding: 1.5rem;
+	margin: 2rem 0;
+}
+
+.project-context p {
+	margin: 1rem 0;
+	line-height: 1.6;
+}
+
+.project-context p:first-child {
+	margin-top: 0;
+}
+
+.compatibility-note {
+	font-size: 0.9rem;
+	color: #94a3b8;
+	margin-top: 1rem;
+	padding-top: 1rem;
+	border-top: 1px solid rgba(157, 126, 255, 0.2);
+}
+
+.framework-note {
+	font-size: 1.1rem;
+	color: #94a3b8;
+	margin: 1rem 0 2rem;
+	line-height: 1.6;
+}
+
+.evolution-roadmap {
+	margin: 2rem 0;
+	padding: 1rem;
+	background: rgba(15, 23, 42, 0.7);
+	border-radius: 12px;
+}
+
+.evolution-roadmap h3 {
+	color: #BCA5FF;
+	font-size: 2rem;
+	margin-bottom: 2rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 2px solid rgba(157, 126, 255, 0.2);
+}
+
+.evolution-roadmap .phase {
+	margin: 2rem 0;
+	padding: 1.5rem;
+	background: rgba(15, 23, 42, 0.5);
+	border: 1px solid rgba(157, 126, 255, 0.2);
+	border-radius: 8px;
+	transition: transform 0.3s ease;
+}
+
+.evolution-roadmap .phase:hover {
+	transform: translateY(-2px);
+	background: rgba(157, 126, 255, 0.1);
+}
+
+.evolution-roadmap h4 {
+	color: var(--accent-color);
+	font-size: 1.4rem;
+	margin-bottom: 1rem;
+}
+
+.evolution-roadmap p {
+	color: #e2e8f0;
+	line-height: 1.6;
+	margin-bottom: 1rem;
+}
+
+.agent-features,
+.marketplace-features {
+	list-style: none;
+	padding: 0;
+	margin: 1rem 0;
+}
+
+.agent-features li,
+.marketplace-features li {
+	color: #e2e8f0;
+	margin: 0.5rem 0;
+	padding-left: 1.5rem;
+	position: relative;
+}
+
+.agent-features li::before,
+.marketplace-features li::before {
+	content: '→';
+	position: absolute;
+	left: 0;
+	color: var(--accent-color);
+}
+
+/* Add hover effect for list items */
+.agent-features li:hover,
+.marketplace-features li:hover {
+	color: #BCA5FF;
+}
+
+/* Add subtle animation for phase transitions */
+.evolution-roadmap .phase {
+	animation: fadeInUp 0.5s ease forwards;
+	opacity: 0;
+	transform: translateY(20px);
+}
+
+.evolution-roadmap .phase:nth-child(1) { animation-delay: 0.1s; }
+.evolution-roadmap .phase:nth-child(2) { animation-delay: 0.2s; }
+.evolution-roadmap .phase:nth-child(3) { animation-delay: 0.3s; }
+.evolution-roadmap .phase:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
