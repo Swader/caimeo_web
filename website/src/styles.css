@@ -519,14 +519,17 @@ footer
 
 .social-links
 {
-	margin-bottom:1rem
+	margin-bottom:1rem;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	gap:1rem
 }
 
 .social-links a
 {
 	color:var(--text-color);
 	text-decoration:none;
-	margin:0 1rem;
 	transition:color .3s ease
 }
 
@@ -549,6 +552,15 @@ footer
 	.shard-info
 	{
 		grid-template-columns:1fr
+	}
+
+	.marketplace-links {
+		margin-left: 0;
+		margin-top: 1rem;
+	}
+
+	.social-links {
+		flex-direction:column;
 	}
 }
 
@@ -1652,4 +1664,89 @@ li
 #equipment-system
 {
 	margin-bottom:3rem
+}
+
+/* New introduction styling */
+.intro-content {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 2rem 0;
+}
+
+.lead-text {
+	font-size: 1.2rem;
+	line-height: 1.8;
+	color: #94a3b8;
+	margin-bottom: 3rem;
+}
+
+.framework-highlights {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 2rem;
+	margin-top: 3rem;
+}
+
+.highlight-card {
+	background: var(--card-bg);
+	border: 1px solid var(--border-accent);
+	border-radius: 12px;
+	padding: 2rem;
+}
+
+.context-intro {
+	font-size: 1.2rem;
+	color: #94a3b8;
+	margin-bottom: 2rem;
+	max-width: 800px;
+}
+
+#on-chain-context,
+#off-chain-context {
+	margin-top: 4rem;
+}
+
+.github-link {
+	margin-top: 1rem;
+	text-align: left;
+}
+
+.github-link a {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: var(--accent-color);
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+.github-link a:hover {
+	color: #BCA5FF;
+}
+
+.github-link img {
+	opacity: 0.8;
+	transition: opacity 0.3s ease;
+}
+
+.github-link a:hover img {
+	opacity: 1;
+}
+
+.marketplace-links {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	margin-left: 2rem;
+}
+
+@media (max-width: 768px) {
+	.marketplace-links {
+		margin-left: 0;
+		margin-top: 1rem;
+	}
+
+	.social-links {
+		flex-direction: column;
+	}
 }
