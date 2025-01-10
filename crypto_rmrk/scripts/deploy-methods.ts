@@ -190,11 +190,6 @@ export async function deploySoulShard(): Promise<SoulShard> {
       constructorArgs: args,
       contract: 'contracts/Shard.sol:SoulShard'
     });
-
-    // Only do on testing, or if whitelisted for production
-    // const registry = await getRegistry();
-    // await registry.addExternalCollection(contractAddress, args[0]);
-    // console.log('Collection added to Singular Registry');
   }
 
   console.log('Deployment Summary:');
