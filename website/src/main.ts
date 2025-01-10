@@ -196,6 +196,61 @@ function showTransactionStatus(message: string, isError = false) {
     }
 }
 
+// Add these constants with the other network-related constants
+const POLYGON_CHAIN_ID = "0x89"; // 137 in hex
+const POLYGON_CHAIN_PARAMS = {
+    chainId: POLYGON_CHAIN_ID,
+    chainName: "Polygon Mainnet",
+    nativeCurrency: {
+        name: "MATIC",
+        symbol: "MATIC",
+        decimals: 18
+    },
+    rpcUrls: POLYGON_RPC_URLS,
+    blockExplorerUrls: ["https://polygonscan.com"]
+};
+
+// Add this new function near the other network-related functions
+async function ensurePolygonNetwork(provider: any): Promise<boolean> {
+    try {
+        const chainId = await provider.request({ method: 'eth_chainId' });
+        if (chainId !== POLYGON_CHAIN_ID) {
+            try {
+                // Try to switch to Polygon network
+                await provider.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: POLYGON_CHAIN_ID }],
+                });
+                return true;
+            } catch (switchError: any) {
+                // This error code indicates that the chain has not been added to the wallet
+                if (switchError.code === 4902) {
+                    try {
+                        await provider.request({
+                            method: 'wallet_addEthereumChain',
+                            params: [POLYGON_CHAIN_PARAMS],
+                        });
+                        return true;
+                    } catch (addError) {
+                        console.error('Error adding Polygon network:', addError);
+                        showTransactionStatus('Failed to add Polygon network', true);
+                        return false;
+                    }
+                } else {
+                    console.error('Error switching to Polygon network:', switchError);
+                    showTransactionStatus('Failed to switch network', true);
+                    return false;
+                }
+            }
+        }
+        return true;
+    } catch (error) {
+        console.error('Error checking network:', error);
+        showTransactionStatus('Failed to check network', true);
+        return false;
+    }
+}
+
 // Update the handleMint function
 async function handleMint() {
     setMintButtonLoading(true);
@@ -208,13 +263,20 @@ async function handleMint() {
             }
         }
 
-        // Get the correct provider
         const ethereumProvider = window.phantom?.ethereum?.isPhantom 
             ? window.phantom.ethereum 
             : window.ethereum;
             
         if (!ethereumProvider) {
             throw new Error('No wallet provider found');
+        }
+
+        // Add network check here
+        if (!IS_LOCAL) {  // Skip network check for local development
+            const networkSwitched = await ensurePolygonNetwork(ethereumProvider);
+            if (!networkSwitched) {
+                throw new Error('Failed to switch to Polygon network');
+            }
         }
 
         const provider = new ethers.BrowserProvider(ethereumProvider);
@@ -253,12 +315,19 @@ async function handleMint() {
 
     } catch (error) {
         console.error('Error during minting:', error);
-        if (error.code === 4001) {
-            showTransactionStatus('Transaction cancelled', true);
-        } else if (error.code === -32603) {
-            showTransactionStatus('Insufficient WETH balance', true);
+        
+        // Get error code from the nested structure
+        const errorCode = error.info?.error?.code || error.code;
+        
+        // Simplified user-friendly error messages
+        if (errorCode === 4001) {
+            showTransactionStatus('user rejected action', true);
+        } else if (errorCode === -32603) {
+            showTransactionStatus('insufficient balance', true);
+        } else if (error.message?.includes('network')) {
+            showTransactionStatus('network error', true);
         } else {
-            showTransactionStatus('Transaction failed', true);
+            showTransactionStatus('transaction failed', true);
         }
     } finally {
         setMintButtonLoading(false);
