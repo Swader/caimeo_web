@@ -38,6 +38,7 @@ async function buildIt() {
     await copy("./src/styles.css", "./dist/styles.css");
     await copy("./src/images", "./dist/images");
     await copy("./src/ethers.umd.min.js", "./dist/ethers.umd.min.js");
+    await copy("./src/ethers6.min.js", "./dist/ethers6.min.js");
 
     console.log('Build complete! Files written to ./dist');
     stop();

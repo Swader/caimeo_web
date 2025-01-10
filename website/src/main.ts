@@ -1,4 +1,4 @@
-import { ethers } from "./ethers.umd.min.js";
+import { ethers } from "./ethers6.min.js";
 
 // Environment-specific constants
 const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
@@ -123,7 +123,7 @@ async function connectWallet(): Promise<string | null> {
             return null;
         }
 
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const provider = new ethers.BrowserProvider(window.ethereum);
         
         // Request account access
         const accounts = await provider.send("eth_requestAccounts", []);
@@ -186,8 +186,8 @@ async function handleMint() {
             }
         }
 
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
         const mintAmount = Number((document.getElementById('mint-amount') as HTMLSelectElement).value);
         
         // Initialize contracts
@@ -196,16 +196,16 @@ async function handleMint() {
         
         // Calculate total cost for this mint
         const pricePerMint = await contract.pricePerMint();
-        const totalCost = pricePerMint.mul(mintAmount);
+        const totalCost = pricePerMint * BigInt(mintAmount);
         
         // Check current allowance
         const allowance = await wethContract.allowance(userAddress, CONTRACT_ADDRESS);
         
         // Only request approval if current allowance is less than needed
-        if (allowance.lt(totalCost)) {
+        if (allowance < totalCost) {
             showTransactionStatus('Requesting WETH approval...');
             // Request approval for max amount (7 WETH) to save gas on future mints
-            const maxApproval = ethers.utils.parseEther(MAX_WETH_APPROVAL);
+            const maxApproval = ethers.parseEther(MAX_WETH_APPROVAL);
             const approveTx = await wethContract.approve(CONTRACT_ADDRESS, maxApproval);
             showTransactionStatus('Confirming WETH approval...');
             await approveTx.wait();
@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Check if already connected
     if (window.ethereum) {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const provider = new ethers.BrowserProvider(window.ethereum);
         provider.send("eth_accounts", [])
             .then(accounts => {
                 if (accounts.length > 0) {
@@ -269,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function updateMintProgress() {
     try {
         // Create Web3 instance
-        const provider = new ethers.providers.JsonRpcProvider(RPC_URL);
+        const provider = new ethers.JsonRpcProvider(RPC_URL);
         const contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
 
         // Get total supply
