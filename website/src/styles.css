@@ -393,12 +393,8 @@ h3
 	gap:2rem;
 	position:relative;
 	width:100%;
-	min-height:150px
-}
-
-.phase:nth-child(odd)
-{
-	flex-direction:row-reverse
+	min-height:150px;
+    flex-direction: column;
 }
 
 .phase-content
@@ -454,16 +450,6 @@ h3
 	line-height:1.6
 }
 
-.phase::after
-{
-	content:'';
-	position:absolute;
-	top:50%;
-	width:calc(5% - 30px);
-	height:2px;
-	background:linear-gradient(to right,#9D7EFF,transparent)
-}
-
 .phase:nth-child(odd)::after
 {
 	left:55%;
@@ -491,11 +477,6 @@ h3
 		left:30px
 	}
 
-	.phase,.phase:nth-child(odd)
-	{
-		flex-direction:row
-	}
-
 	.phase-number
 	{
 		width:40px;
@@ -510,11 +491,6 @@ h3
 		margin-left:20px
 	}
 
-	.phase::after
-	{
-		width:20px;
-		left:30px!important
-	}
 }
 
 footer
@@ -1796,7 +1772,6 @@ li
 .evolution-roadmap {
 	margin: 2rem 0;
 	padding: 1rem;
-	background: rgba(15, 23, 42, 0.7);
 	border-radius: 12px;
 }
 
@@ -1811,10 +1786,10 @@ li
 .evolution-roadmap .phase {
 	margin: 2rem 0;
 	padding: 1.5rem;
-	background: rgba(15, 23, 42, 0.5);
 	border: 1px solid rgba(157, 126, 255, 0.2);
 	border-radius: 8px;
 	transition: transform 0.3s ease;
+	width: 100%;
 }
 
 .evolution-roadmap .phase:hover {
@@ -1940,4 +1915,48 @@ section {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 	gap: 1rem;
+}
+
+/* Add mobile styles */
+@media (max-width: 768px) {
+	.evolution-roadmap {
+		padding: 0.5rem;
+	}
+
+	.evolution-roadmap .phase {
+		margin: 1rem 0;
+		padding: 1rem;
+	}
+
+	.evolution-roadmap h4 {
+		font-size: 1.2rem;
+		margin-bottom: 0.75rem;
+	}
+
+	.evolution-roadmap p {
+		font-size: 0.95rem;
+		line-height: 1.5;
+	}
+
+	.agent-features,
+	.marketplace-features {
+		margin: 0.5rem 0;
+	}
+
+	.agent-features li,
+	.marketplace-features li {
+		padding-left: 1.25rem;
+		margin: 0.4rem 0;
+		font-size: 0.95rem;
+	}
+
+	/* Ensure list items don't overflow */
+	.evolution-roadmap ul {
+		padding-right: 0.5rem;
+	}
+
+	.evolution-roadmap ul li {
+		word-wrap: break-word;
+		overflow-wrap: break-word;
+	}
 }
