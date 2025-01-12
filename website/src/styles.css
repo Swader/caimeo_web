@@ -1423,7 +1423,8 @@ li
 	border:1px solid rgba(157,126,255,0.2);
 	border-radius:12px;
 	padding:2rem;
-	transition:transform .3s ease
+	transition:transform .3s ease;
+    margin-bottom: 1rem;
 }
 
 .integration-logo
