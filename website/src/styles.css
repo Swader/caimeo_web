@@ -23,7 +23,9 @@ body
 	font-family:system-ui,-apple-system,sans-serif;
 	background-color:var(--background-color);
 	color:var(--text-color);
-	line-height:1.6
+	line-height:1.6;
+	overflow-x: hidden;
+	width: 100%;
 }
 
 header
@@ -133,7 +135,9 @@ section
 	padding:2rem 0;
 	opacity:0;
 	transform:translateY(20px);
-	animation:fadeIn .6s ease forwards
+	animation:fadeIn .6s ease forwards;
+	max-width: 100%;
+	overflow-x: hidden;
 }
 
 @keyframes fadeIn {
@@ -305,7 +309,10 @@ h3
 	display:grid;
 	grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 	gap:2rem;
-	margin-top:3rem
+	margin-top:3rem;
+	width: 100%;
+	margin: 0;
+	padding: 1rem 0;
 }
 
 .feature
@@ -569,7 +576,10 @@ footer
 	display:grid;
 	grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
 	gap:2rem;
-	margin-top:3rem
+	margin-top:3rem;
+	width: 100%;
+	margin: 0;
+	padding: 1rem 0;
 }
 
 .standard-card
@@ -647,7 +657,10 @@ footer
 	display:grid;
 	grid-template-columns:repeat(3,1fr);
 	gap:2rem;
-	margin-top:3rem
+	margin-top:3rem;
+	width: 100%;
+	margin: 0;
+	padding: 1rem 0;
 }
 
 .evolution-card
@@ -679,7 +692,10 @@ footer
 	display:grid;
 	grid-template-columns:repeat(2,1fr);
 	gap:3rem;
-	margin-top:3rem
+	margin-top:3rem;
+	width: 100%;
+	margin: 0;
+	padding: 1rem 0;
 }
 
 .use-case
@@ -1560,7 +1576,9 @@ li
 	display:grid;
 	grid-template-columns:1fr 1.5fr 1fr;
 	gap:2rem;
-	align-items:start
+	align-items:start;
+	width: 100%;
+	overflow-x: hidden;
 }
 
 .simulation-map,.classroom-map
@@ -1869,4 +1887,64 @@ li
 		opacity: 1;
 		transform: translateY(0);
 	}
+}
+
+/* Add/update these rules */
+
+/* Ensure all images are properly constrained */
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+/* Update content wrapper padding for mobile */
+@media (max-width: 768px) {
+	.content-wrapper {
+		padding: 0 1rem;
+	}
+
+	/* Adjust system diagram for mobile */
+	.system-diagram img {
+		width: 100%;
+	}
+
+	/* Ensure grids don't overflow */
+	.simulation-overview,
+	.environment-overview {
+		display: block;  /* Stack on mobile instead of grid */
+		width: 100%;
+		overflow-x: hidden;
+	}
+
+	/* Adjust marketplace links spacing */
+	.marketplace-links {
+		margin: 1rem 0;
+		gap: 0.5rem;
+	}
+}
+
+/* Add this to prevent any potential overflow */
+body {
+	overflow-x: hidden;
+	width: 100%;
+}
+
+/* Ensure all sections stay within viewport */
+section {
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
+/* Update grid containers to prevent overflow */
+.features,
+.standards-grid,
+.evolution-grid,
+.use-cases-grid,
+.showcase-grid {
+	width: 100%;
+	margin: 0;
+	padding: 1rem 0;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 1rem;
 }
