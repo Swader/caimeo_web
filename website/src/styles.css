@@ -1960,3 +1960,124 @@ section {
 		overflow-wrap: break-word;
 	}
 }
+
+/* Add these new styles */
+.whitepaper-link {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.whitepaper-link.bottom {
+    margin-top: 4rem;
+    padding: 2rem;
+    background: rgba(157,126,255,0.1);
+    border-radius: 12px;
+}
+
+.principles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.principle-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-accent);
+    padding: 1.5rem;
+    border-radius: 12px;
+}
+
+.environment-overview {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.environment-features {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.scenario {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border-accent);
+    border-radius: 12px;
+}
+
+.scenario-content {
+    margin-top: 1rem;
+}
+
+.image-placeholder {
+    border: 1px solid var(--border-accent);
+    border-radius: 8px;
+    color: var(--accent-color);
+    font-size: 0.9rem;
+}
+
+.rewards-system {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.reward-component {
+    background: var(--card-bg);
+    border: 1px solid var(--border-accent);
+    padding: 1.5rem;
+    border-radius: 12px;
+}
+
+@media (min-width: 768px) {
+    .environment-overview {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Add token page styles */
+.token-details.card,
+.token-disclaimer.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-accent);
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+}
+
+.token-disclaimer ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.token-disclaimer li {
+    margin: 0.5rem 0;
+}
+
+.warning-box {
+    background: rgba(220, 38, 38, 0.1);
+    border: 1px solid rgba(220, 38, 38, 0.3);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+.warning-box p {
+    color: #ef4444;
+}
+
+/* Add section divider styles */
+.section-divider {
+    margin: 4rem 0;
+    padding: 4rem 0;
+    border-top: 1px solid var(--border-accent);
+    text-align: center;
+}
+
+.section-divider h2 {
+    margin-bottom: 1rem;
+}

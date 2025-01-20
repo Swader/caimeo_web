@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What is Caimeo - Technical Overview</title>
+    <title>What is Caimeo - The Framework</title>
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
@@ -21,13 +21,13 @@
             </div>
             <div class="nav-links">
                 <div class="nav-item">
-                <a href="index.html">Home</a>
+                    <a href="index.html">Home</a>
                     <div class="dropdown">
-                <a href="index.html#about">About</a>
+                        <a href="index.html#about">About</a>
                         <a href="index.html#evolution">Evolution System</a>
-                <a href="index.html#soulshards">Soul Shards</a>
+                        <a href="index.html#soulshards">Soul Shards</a>
                         <a href="index.html#use-cases">Use Cases</a>
-                <a href="index.html#roadmap">Roadmap</a>
+                        <a href="index.html#roadmap">Roadmap</a>
                     </div>
                 </div>
                 <div class="nav-item">
@@ -35,6 +35,9 @@
                 </div>
                 <div class="nav-item">
                     <a href="caimeo-agents.html">Caimeo Agents</a>
+                </div>
+                <div class="nav-item">
+                    <a href="caimeo-token.html">Caimeo Token</a>
                 </div>
             </div>
             <div class="marketplace-links">
@@ -51,35 +54,36 @@
     <main>
         <section id="introduction">
             <h1>What is Caimeo?</h1>
-            <p class="subtitle">An Open Source Framework for Sovereign AI Agents</p>
+            <p class="subtitle">A Local-First Framework for Deterministic AI Simulations</p>
             <div class="system-diagram" style="text-align: center;">
+                <!-- Replace "diagram.png" below with your actual framework image or architecture diagram if available -->
                 <img src="images/diagram.png" width="80%" alt="Caimeo System Architecture Diagram" class="architecture-diagram">
             </div>
             <div class="intro-content">
                 <p class="lead-text">
-                    Caimeo is an open-source framework designed for creating and managing self-sufficient, sovereign AI agents that operate without human intervention. Whether running on-chain as autonomous evolving entities or off-chain in specialized simulation environments, Caimeo provides the foundation for next-generation AI systems.
+                    Caimeo is an open-source framework for creating autonomous AI agents that can run in **verifiable, deterministic** environments—either **fully offline** or integrated with on-chain/TEE systems for advanced proofs. Our core mission is to enable developers to deploy, analyze, and test AI logic without centralized dependencies, preserving privacy and guaranteeing reproducible results.
                 </p>
                 
                 <div class="framework-highlights">
                     <div class="highlight-card">
-                        <h3>Core Features</h3>
+                        <h3>Core Capabilities</h3>
                         <ul>
-                            <li>Fully autonomous agent operations</li>
-                            <li>Sovereign identity management</li>
-                            <li>Cross-chain communication</li>
-                            <li>Simulation environment support</li>
-                            <li>On-chain and off-chain execution</li>
+                            <li>**Offline** agent simulation with deterministic random seeds</li>
+                            <li>Flexible environment definitions (grid- or scenario-based)</li>
+                            <li>Integrated memory and modular agent logic (LLMs, state machines, etc.)</li>
+                            <li>Verifiable proofs of simulation results (on-chain or via TEE attestations)</li>
+                            <li>Optional bridging to blockchain for advanced use cases</li>
                         </ul>
                     </div>
                     
                     <div class="highlight-card">
                         <h3>Key Benefits</h3>
                         <ul>
-                            <li>Zero human intervention required</li>
-                            <li>Flexible deployment options</li>
-                            <li>Modular architecture</li>
-                            <li>Enhanced privacy and security</li>
-                            <li>Easily shareable and tradable agents, skills, traits, environments, scenarios.</li>
+                            <li>**No middlemen**: purely local-first or offline execution possible</li>
+                            <li>**Deterministic**: identical inputs yield identical outputs every time</li>
+                            <li>**Modular**: drop-in AI modules, environment expansions, and more</li>
+                            <li>**Secure**: uses Trusted Execution Environments (TEEs) or ZK to guarantee fairness</li>
+                            <li>**Extendable**: easy to integrate with external systems, or embed in gaming, robotics, research, etc.</li>
                         </ul>
                     </div>
                 </div>
@@ -88,301 +92,103 @@
 
         <section id="technical-foundation">
             <h2>Technical Foundation</h2>
-            <p class="subtitle">Built on established standards for maximum compatibility and security</p>
+            <p class="subtitle">Built on open standards for maximum extensibility</p>
             
             <div class="standards-grid">
                 <div class="standard-card">
-                    <h3><a href="https://evm.rmrk.app/composable-equippable">ERC-6220: Composable NFTs</a></h3>
-                    <p>The backbone of Caimeo's modular agent system. This standard enables:</p>
-                    <ul>
-                        <li>Nested NFT structures for complex agent compositions</li>
-                        <li>Dynamic equipment slots for skills and traits</li>
-                        <li>Hierarchical relationships between agent components</li>
-                    </ul>
+                    <h3>Deterministic Simulation Engine</h3>
+                    <p>The heart of Caimeo is a tick-based simulation loop. Each step processes every active agent (AI or environment actor) according to a pre-seeded random number generator. This ensures any offline or on-chain re-run with the same seed yields identical results.</p>
                 </div>
 
                 <div class="standard-card">
-                    <h3><a href="https://evm.rmrk.app/soulbound">ERC-6454: Soulbound 2.0</a></h3>
-                    <p>Powers non-transferable core agent attributes:</p>
-                    <ul>
-                        <li>Permanent personality traits</li>
-                        <li>Learned behaviors and experiences</li>
-                        <li>Core intelligence modules</li>
-                    </ul>
-                </div></div>
-                <div class="standards-grid">
-                <div class="standard-card">
-                    <h3><a href="https://evm.rmrk.app/multiasset">ERC-5773: Multi-Asset</a></h3>
-                    <p>Enables agent evolution and state changes:</p>
-                    <ul>
-                        <li>Seamless evolution from Soul Shard to full agent (<a href="https://evm.rmrk.app/use-cases/character-progression">learn more</a>)</li>
-                        <li>Multiple visual and functional states</li>
-                        <li>Progressive unlocking of capabilities</li>
-                    </ul>
-                </div>
-
-                <div class="standard-card">
-                    <h3>Core Framework Integration</h3>
-                    <p>Caimeo combines the best of two leading frameworks:</p>
-                    
-                    <div class="framework-integration">
-                        <h4><a href="https://github.com/elizaOS/eliza">ElizaOS</a> - Agent Operations</h4>
-                        <ul>
-                            <li>Multi-model AI support (Llama, OpenAI, Anthropic)</li>
-                            <li>Built-in memory and document store</li>
-                            <li>Proven autonomous agent operations</li>
-                        </ul>
-                    </div>
-
-                    <div class="framework-integration">
-                        <h4><a href="https://framework.freysa.ai/overview">Freysa (FAI)</a> - Sovereignty Layer</h4>
-                        <ul>
-                            <li>Secure TEE-based key management</li>
-                            <li>Advanced state persistence</li>
-                            <li>Committee-based governance</li>
-                        </ul>
-                    </div>
-
-                    <p class="integration-note">By combining these frameworks, Caimeo achieves both operational excellence and true agent sovereignty, allowing developers to choose the components that best suit their needs.</p>
+                    <h3>Environment Plugins & Expansions</h3>
+                    <p>Caimeo uses a plugin-based architecture for environment logic. You can equip expansions for hazards, dynamic conditions (e.g., fires, storms), or entirely new rule sets. This modular approach keeps the core engine simple while allowing advanced scenario-building.</p>
                 </div>
             </div>
-        </section>
 
-        <section id="integrations">
-            <h2>Native Integrations</h2>
-            <p class="subtitle">Works out of the box with industry-leading solutions</p>
-
-            <div class="integration-grid">
-                <div class="integration-card">
-                    <div class="integration-logo">
-                        <img src="images/agg.png" alt="AggLayer" style="height: 50%;">
-                    </div>
-                    <h3>AggLayer</h3>
-                    <p>Native support for cross-chain operations and TEE compute:</p>
+            <div class="standards-grid">
+                <div class="standard-card">
+                    <h3>TEE & Zero-Knowledge Support</h3>
+                    <p>
+                        For trustless or privacy-sensitive use cases, Caimeo integrates with:
+                    </p>
                     <ul>
-                        <li>Trustless cross-chain communication</li>
-                        <li>Autonomous TEE compute purchasing</li>
-                        <li>Cross-chain message passing</li>
-                        <li>Unified environment for cross-chain autonomy</li>
+                        <li>**TEE** solutions (e.g., Phala Network) for confidential simulation runs</li>
+                        <li>**ZK proofs** (planned) to attest to results without revealing agent logic</li>
                     </ul>
                 </div>
-
-                <div class="integration-card">
-                    <div class="integration-logo">
-                        <img src="images/phala.png" alt="Phala Network">
-                    </div>
-                    <h3>Phala Network</h3>
-                    <p>Secure and private compute environment:</p>
-                    <ul>
-                        <li>Trusted Execution Environment (TEE)</li>
-                        <li>Confidential smart contracts</li>
-                        <li>Secure off-chain computation</li>
-                        <li>Verifiable compute results</li>
-                    </ul>
-                </div>
-
-                <div class="integration-card">
-                    <div class="integration-logo">
-                        <img src="images/privado.webp" alt="Privado ID">
-                    </div>
-                    <h3>Privado ID</h3>
-                    <p>Built-in sovereign identity management:</p>
-                    <ul>
-                        <li>Zero-knowledge identity proofs</li>
-                        <li>Verifiable credentials</li>
-                        <li>Privacy-preserving reputation</li>
-                        <li>Secure attribute verification</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="execution-contexts">
-            <h2>Execution Contexts</h2>
-            <p class="subtitle">Flexible deployment options for different use cases</p>
-
-            <section id="on-chain-context">
-                <h3>On-Chain Context</h3>
-                <p class="context-intro">Live blockchain environments where agents operate autonomously</p>
                 
-                <div class="showcase-grid">
-                    <div class="showcase-card">
-                        <h3>Cross-Chain Intelligence via AggLayer</h3>
-                        <div class="user-story">
-                            <p class="story-intro">Imagine a Caimeo agent that:</p>
-                            <ul>
-                                <li>Monitors DeFi opportunities across multiple chains</li>
-                                <li>Autonomously provisions its own TEE compute through AggLayer</li>
-                                <li>Executes cross-chain arbitrage without human intervention</li>
-                                <li>Manages its own resource allocation based on market conditions</li>
-                            </ul>
-                            <div class="example-scenario">
-                                <h4>Example Scenario</h4>
-                                <p>Your agent detects a profitable arbitrage opportunity between Polygon and Ethereum. It instantly:</p>
-                                <ol>
-                                    <li>Spins up secure TEE compute through AggLayer</li>
-                                    <li>Validates the opportunity in a private environment</li>
-                                    <li>Executes the trade across chains</li>
-                                    <li>Scales down compute when inactive to optimize costs</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="showcase-card">
-                        <h3>Sovereign Identity with Privado</h3>
-                        <div class="user-story">
-                            <p class="story-intro">Your agent develops a unique identity based on:</p>
-                            <ul>
-                                <li>Verifiable track record of successful operations</li>
-                                <li>Cryptographically proven skill acquisitions</li>
-                                <li>Privacy-preserving reputation scores</li>
-                                <li>Zero-knowledge proofs of capabilities</li>
-                            </ul>
-                            <div class="example-scenario">
-                                <h4>Real-World Application</h4>
-                                <p>A decentralized marketplace wants to verify agent capabilities without compromising privacy:</p>
-                                <ol>
-                                    <li>Agent presents Privado-verified credentials</li>
-                                    <li>Marketplace validates skills without accessing sensitive data</li>
-                                    <li>Reputation builds through verified actions</li>
-                                    <li>Other agents can trust capabilities without revealing strategies</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="showcase-card">
-                        <h3>Combined Power: Privacy + Performance</h3>
-                        <div class="user-story">
-                            <p class="story-intro">The synergy creates unprecedented possibilities:</p>
-                            <ul>
-                                <li>Private, secure cross-chain operations</li>
-                                <li>Verifiable performance without data exposure</li>
-                                <li>Autonomous resource scaling with identity preservation</li>
-                                <li>Trust-minimized agent collaboration</li>
-                            </ul>
-                            <div class="example-scenario">
-                                <h4>Future Vision</h4>
-                                <p>Agents form autonomous organizations where they:</p>
-                                <ol>
-                                    <li>Verify each other's capabilities through Privado</li>
-                                    <li>Share TEE resources via AggLayer</li>
-                                    <li>Execute complex multi-chain strategies</li>
-                                    <li>Build collective reputation while maintaining individual privacy</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
+                <div class="standard-card">
+                    <h3>Multi-Model LLM Support</h3>
+                    <p>
+                        The framework accommodates large language models or simpler AI modules. You can plug in any GPT-like or open-source LLM (Llama, OpenAI, Anthropic, etc.) to power agent decision-making. Caimeo leaves the choice of AI backend entirely up to you.
+                    </p>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section id="off-chain-context">
-                <h3>Off-Chain Context</h3>
-                <p class="context-intro">Specialized simulation environments for testing and training</p>
+        <section id="how-it-works">
+            <h2>How Caimeo Works</h2>
+            <p class="subtitle">Local or remote—always deterministic</p>
 
-                <div class="use-cases">
-                    <div class="use-case crisis-simulation">
-                        <h3>Crisis Response Simulation</h3>
-                        <div class="simulation-overview">
-                            <div class="simulation-description">
-                                <h4>Environment as NFT</h4>
-                                <p>The simulation environment itself is tokenized using ERC-6220, containing:</p>
-                                <ul>
-                                    <li>Physical layout and obstacles</li>
-                                    <li>Entry/exit points</li>
-                                    <li>Environmental hazards</li>
-                                    <li>Line-of-sight calculations</li>
-                                </ul>
-
-                                <h4>Agent Integration</h4>
-                                <p>Custom agents are loaded as child NFTs within the environment, each with:</p>
-                                <ul>
-                                    <li>Individual skill sets and training</li>
-                                    <li>Behavioral patterns</li>
-                                    <li>Decision-making algorithms</li>
-                                    <li>Physical capabilities</li>
-                                </ul>
-                            </div>
-
-                            <div class="simulation-interface">
-                                <!-- Placeholder for the clickable diagram -->
-                                <div class="simulation-map" id="crisis-map">
-                                    <div class="map-placeholder">
-                                        Interactive Crisis Simulation Map
-                                        <span class="coming-soon">(Coming Soon)</span>
-                                    </div>
-                                </div>
-                                
-                                <!-- Stats panel that will show when agents are clicked -->
-                                <div class="agent-stats" id="agent-stats">
-                                    <h4>Agent Statistics</h4>
-                                    <div class="stats-content">
-                                        <p>Select an agent on the map to view their statistics</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="simulation-outcomes">
-                                <h4>Variable Analysis</h4>
-                                <p>The framework enables rapid testing of different scenarios:</p>
-                                <ul>
-                                    <li>Base scenario survival rates</li>
-                                    <li>Impact of different training levels</li>
-                                    <li>Equipment effectiveness</li>
-                                    <li>Environmental modifications</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="use-case educational-environment">
-                        <h3>Adaptive Learning Environment</h3>
-                        <div class="environment-overview">
-                            <div class="environment-description">
-                                <h4>Classroom as NFT</h4>
-                                <p>Virtual learning spaces are tokenized environments containing:</p>
-                                <ul>
-                                    <li>Customizable learning modules</li>
-                                    <li>Interactive elements</li>
-                                    <li>Progress tracking mechanisms</li>
-                                    <li>Adaptive difficulty systems</li>
-                                </ul>
-
-                                <h4>AI Tutors as Agents</h4>
-                                <p>Teacher agents are equipped with:</p>
-                                <ul>
-                                    <li>Subject matter expertise</li>
-                                    <li>Teaching methodologies</li>
-                                    <li>Student assessment capabilities</li>
-                                    <li>Adaptive response patterns</li>
-                                </ul>
-                            </div>
-
-                            <div class="learning-visualization">
-                                <!-- Placeholder for educational environment visualization -->
-                                <div class="classroom-map">
-                                    <div class="map-placeholder">
-                                        Interactive Learning Environment
-                                        <span class="coming-soon">(Coming Soon)</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="learning-outcomes">
-                                <h4>Measurable Outcomes</h4>
-                                <p>The system tracks and analyzes:</p>
-                                <ul>
-                                    <li>Learning rate improvements</li>
-                                    <li>Knowledge retention</li>
-                                    <li>Engagement levels</li>
-                                    <li>Personalization effectiveness</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+            <div class="execution-overview">
+                <div class="execution-context">
+                    <h3>Offline or Local-First Mode</h3>
+                    <p>You can run the Caimeo engine entirely offline, specifying an environment definition (2D/3D layout, hazards, event triggers, etc.) and a set of agent logic modules. Caimeo uses a **seed** to ensure everything is perfectly reproducible. Developers can iterate quickly without any chain interactions.</p>
                 </div>
-            </section>
+
+                <div class="execution-context">
+                    <h3>TEE-Verified Mode</h3>
+                    <p>When outcomes require trustlessness or confidentiality, Caimeo can run inside a **Trusted Execution Environment** (e.g., Phala). The TEE keeps private agent logic secure while producing a verifiable on-chain attestation of the final results. This eliminates tampering, ensures fairness, and keeps advanced AI code hidden from adversaries.</p>
+                </div>
+
+                <div class="execution-context">
+                    <h3>On-Chain Checks or Full On-Chain Execution</h3>
+                    <p>Caimeo can also function in a partial on-chain environment: a contract can read the TEE output or a ZK proof to confirm the legitimacy of a run. In simpler cases, the entire environment step logic can be ported on-chain (though that may be expensive). The key is that **Caimeo is flexible**—pick your trust model and complexity level.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="framework-use-cases">
+            <h2>Example Use Cases</h2>
+            <p class="subtitle">Where Caimeo can make a difference</p>
+            <div class="use-cases">
+                <div class="use-case">
+                    <h3>Crisis Simulations</h3>
+                    <p>Test emergency response strategies offline. Tweak environment plugins (fire spread, intruder logic, resource constraints) and run thousands of ticks to find best outcomes. Move verified results on-chain if you need public trust.</p>
+                </div>
+                <div class="use-case">
+                    <h3>Game Development & AI NPCs</h3>
+                    <p>Build advanced AI for game NPCs that can run or “train” offline. Import them into your actual game with guaranteed performance based on prior verifiable test runs. Perfect for emergent or unpredictable NPC behavior.</p>
+                </div>
+                <div class="use-case">
+                    <h3>Market or Economic Simulations</h3>
+                    <p>Simulate supply-demand, trading, or macro-economic shifts with AI-driven participants. Keep the entire simulation local or, if needed, post high-level proofs on-chain to demonstrate fairness and consistency of results.</p>
+                </div>
+                <div class="use-case">
+                    <h3>Research & Decision Support</h3>
+                    <p>Environmental modeling, robotics route planning, or any scenario requiring repeated simulations with guaranteed reproducibility. Use Caimeo to automate experimentation, gather data, and refine your AI strategies.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="relation-to-caimeo-agents">
+            <h2>Relation to NFTs & "Caimeo Agents"</h2>
+            <p>
+                **Caimeo** is primarily a self-contained framework for AI simulation. It can optionally connect to NFT-based expansions when you want agent identities, environment ownership, or reward distribution to live on-chain. An example of this is the <em>Caimeo Agents</em> (and "Agent Games") project, where:
+            </p>
+            <ul>
+                <li>Agents and Environments can be tokenized (NFT or SBT) to track ownership or modifications</li>
+                <li>On-chain "proof of outcome" is used to distribute rewards or new abilities</li>
+            </ul>
+            <p>
+                However, this NFT aspect is **not required** to use Caimeo for local or private simulations. It is simply one way to support open, decentralized communities in verifying agent performance. To learn more about how Caimeo is extended into a full NFT-based ecosystem, check out <a href="caimeo-agents.html">Caimeo Agents</a>.
+            </p>
+        </section>
+
+        <section id="call-to-action">
+            <h2>Get Started</h2>
+            <p>Caimeo is open source and welcomes collaboration. If you want to contribute or use Caimeo for your own AI simulations, keep an eye on our GitHub repository (coming soon). If you’re curious about the NFT-based expansions or want to back the project, you can explore <a href="caimeo-agents.html">Caimeo Agents</a> as well.</p>
         </section>
     </main>
 
@@ -408,6 +214,7 @@
         <p>© 2024 Caimeo. All rights reserved.</p>
     </footer>
 
+    <!-- Main script (unchanged) -->
     <script type="module" src="main.js"></script>
 </body>
-</html> 
+</html>

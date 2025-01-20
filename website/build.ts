@@ -29,7 +29,7 @@ async function buildIt() {
     });
 
     // Copy all HTML files
-    for await (const entry of walk("./src", { exts: [".html"] })) {
+    for await (const entry of walk("./src", { exts: [".html", ".pdf"] })) {
         const targetPath = entry.path.replace(/^src\//, "dist/");
         await copy(entry.path, targetPath);
     }
