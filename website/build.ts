@@ -1,49 +1,76 @@
-/// <reference lib="deno.ns" />
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { copyFile, mkdir, readdir, rm } from "node:fs/promises";
 
-import { denoPlugins } from "jsr:@luca/esbuild-deno-loader@^0.11.0";
-import { build, stop } from "npm:esbuild@0.24.0";
-import { copy } from "https://deno.land/std@0.210.0/fs/copy.ts";
-import { ensureDir } from "https://deno.land/std@0.210.0/fs/ensure_dir.ts";
-import { emptyDir } from "https://deno.land/std@0.210.0/fs/empty_dir.ts";
-import { walk } from "https://deno.land/std@0.210.0/fs/walk.ts";
+export type BuildOptions = {
+  minify?: boolean;
+};
 
-async function buildIt() {
-    // Clean and ensure dist directory exists
-    await emptyDir("./dist");
+const WEBSITE_DIR = path.dirname(fileURLToPath(import.meta.url));
+const SRC_DIR = path.join(WEBSITE_DIR, "src");
+const DIST_DIR = path.join(WEBSITE_DIR, "dist");
 
-    // Build TypeScript
-    await build({
-        plugins: [...denoPlugins({})],
-        entryPoints: ["./src/main.ts"],
-        outfile: "./dist/main.js",
-        bundle: true,
-        minify: true,
-        format: "esm",
-        banner: { 
-            js: `// @ts-nocheck\n// deno-lint-ignore-file`
-        },
-        platform: "browser"
-    }).catch((e: Error) => {
-        console.error('Build failed:', e);
-        Deno.exit(1);
-    });
+async function emptyDir(dir: string) {
+  await rm(dir, { recursive: true, force: true });
+  await mkdir(dir, { recursive: true });
+}
 
-    // Copy all HTML files
-    for await (const entry of walk("./src", { exts: [".html", ".pdf"] })) {
-        const targetPath = entry.path.replace(/^src\//, "dist/");
-        await copy(entry.path, targetPath);
-    }
+async function copyDirFiltered(
+  srcDir: string,
+  destDir: string,
+  shouldCopy: (relativePathFromSrcRoot: string) => boolean,
+) {
+  await mkdir(destDir, { recursive: true });
+  const entries = await readdir(srcDir, { withFileTypes: true });
 
-    // Copy other static files
-    await copy("./src/styles.css", "./dist/styles.css");
-    await copy("./src/images", "./dist/images");
-    await copy("./src/ethers.umd.min.js", "./dist/ethers.umd.min.js");
-    await copy("./src/ethers6.min.js", "./dist/ethers6.min.js");
+  await Promise.all(
+    entries.map(async (entry) => {
+      const srcPath = path.join(srcDir, entry.name);
+      const destPath = path.join(destDir, entry.name);
 
-    console.log('Build complete! Files written to ./dist');
-    stop();
+      if (entry.isDirectory()) {
+        await copyDirFiltered(srcPath, destPath, shouldCopy);
+        return;
+      }
+
+      const relativePathFromSrcRoot = path.relative(SRC_DIR, srcPath);
+      if (!shouldCopy(relativePathFromSrcRoot)) return;
+
+      await mkdir(path.dirname(destPath), { recursive: true });
+      await copyFile(srcPath, destPath);
+    }),
+  );
+}
+
+export async function buildSite(options: BuildOptions = {}) {
+  const minify = options.minify ?? true;
+
+  // Clean and ensure dist directory exists
+  await emptyDir(DIST_DIR);
+
+  // Bundle TypeScript for the browser (no external deps)
+  const result = await Bun.build({
+    entrypoints: [path.join(SRC_DIR, "main.ts")],
+    outdir: DIST_DIR,
+    target: "browser",
+    minify,
+  });
+
+  if (!result.success) {
+    console.error("Build failed:");
+    for (const log of result.logs) console.error(log);
+    process.exitCode = 1;
+    return;
+  }
+
+  // Copy all non-TS static assets from src → dist (html/css/images/pdf/js/etc)
+  await copyDirFiltered(SRC_DIR, DIST_DIR, (relativePath) => {
+    return !relativePath.endsWith(".ts");
+  });
+
+  console.log(`Build complete! Files written to ${DIST_DIR}`);
 }
 
 if (import.meta.main) {
-    buildIt();
-} 
+  await buildSite();
+}

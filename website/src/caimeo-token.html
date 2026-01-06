@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Caimeo Token - Utility & Disclaimers</title>
+    <title>Caimeo Token - Migration & Utility</title>
     <link
       rel="icon"
       type="image/png"
@@ -86,180 +86,243 @@
     <div class="content-wrapper">
       <section id="token-info">
         <h1>Caimeo Token</h1>
-        <p class="subtitle">A Utility Token for Agent Operations & Fees</p>
+        <p class="subtitle">Now on Polygon - Utility Token for Agent Operations</p>
 
+        <!-- Token Details -->
         <div class="token-details card">
           <h2>Token Details</h2>
           <ul>
             <li><strong>Name:</strong> Caimeo Token ($CAIMEO)</li>
-            <li><strong>Current Deployment:</strong> Solana Chain</li>
+            <li><strong>Primary Chain:</strong> Polygon</li>
             <li>
-              <strong>Contract Address:</strong>
-              <a href="https://raydium.io/swap/?inputMint=sol&outputMint=61Kav5B7mWLum8xcnrCefdrUsysQhpB7KdNTKiMApump&referrer=HsVLCWnJa4uxn6YdbX5YSAaaLNbATutn1CMje3Cejzyk" target="_blank" rel="noopener noreferrer">61Kav5B7mWLum8xcnrCefdrUsysQhpB7KdNTKiMApump</a>
+              <strong>Native Contract (Polygon):</strong>
+              <code>0x86001E1A161eE746A0A2506060d8Fff9C58dd24c</code>
+              <a href="https://polygonscan.com/token/0x86001E1A161eE746A0A2506060d8Fff9C58dd24c" target="_blank" rel="noopener noreferrer">[View on Polygonscan]</a>
             </li>
             <li>
-              <strong>Planned Utility:</strong> Simulation Fees, Reward Pool,
-              Agent TEE Access
+              <strong>Total Supply:</strong> 1,000,000,000 (1 Billion)
+            </li>
+            <li>
+              <strong>Decimals:</strong> 6
+            </li>
+            <li>
+              <strong>Utility:</strong> Simulation Fees, Reward Pool, Agent TEE Access
+            </li>
+          </ul>
+
+          <div class="token-actions" style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a 
+              href="https://app.uniswap.org/swap?chain=polygon&inputCurrency=0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359&outputCurrency=0x86001E1A161eE746A0A2506060d8Fff9C58dd24c" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="button primary"
+            >
+              Trade on Uniswap
+            </a>
+            <a 
+              href="https://value.app/#/lock/1?chain=137" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="button secondary"
+            >
+              View Founder's Permalock
+            </a>
+          </div>
+        </div>
+
+
+
+        <!-- Bridge Guide -->
+        <div class="bridge-guide card">
+          <h2>Bridge Guide: Solana → Polygon</h2>
+          <p>
+            Use the <a href="https://portalbridge.com/legacy-tools/#/transfer" target="_blank" rel="noopener noreferrer">Wormhole Portal Bridge</a> 
+            to move your CAIMEO from Solana to Polygon. The process takes approximately 15-20 minutes.
+          </p>
+
+          <h3>Step-by-Step Instructions</h3>
+          <ol class="bridge-steps">
+            <li>
+              <strong>Go to Portal Bridge</strong><br>
+              Open <a href="https://portalbridge.com/legacy-tools/#/transfer" target="_blank" rel="noopener noreferrer">portalbridge.com/legacy-tools/#/transfer</a>
+            </li>
+            <li>
+              <strong>Connect Your Solana Wallet</strong><br>
+              Click "Connect" and select your Solana wallet (Phantom, Solflare, etc.)
+            </li>
+            <li>
+              <strong>Select Source & Target</strong><br>
+              <ul>
+                <li>Source Chain: <strong>Solana</strong></li>
+                <li>Target Chain: <strong>Polygon</strong></li>
+              </ul>
+            </li>
+            <li>
+              <strong>Enter Token Address</strong><br>
+              Paste the Solana CAIMEO mint address:
+              <code style="display: block; margin: 0.5rem 0; padding: 0.5rem; background: #0d0d0d; border-radius: 4px; word-break: break-all;">61Kav5B7mWLum8xcnrCefdrUsysQhpB7KdNTKiMApump</code>
+            </li>
+            <li>
+              <strong>Enter Amount</strong><br>
+              Input the amount of CAIMEO you want to bridge
+            </li>
+            <li>
+              <strong>Connect Polygon Wallet</strong><br>
+              Connect your MetaMask or other EVM wallet for Polygon
+            </li>
+            <li>
+              <strong>Confirm & Sign</strong><br>
+              Review the transaction and sign with your Solana wallet
+            </li>
+            <li>
+              <strong>Wait for Confirmation</strong><br>
+              The bridge typically takes 15-20 minutes. Keep the page open.
+            </li>
+            <li>
+              <strong>Redeem on Polygon</strong><br>
+              Once confirmed, click "Redeem" to receive your wrapped CAIMEO (wCAIMEO) on Polygon
+            </li>
+          </ol>
+
+          <div class="warning-box" style="margin-top: 1.5rem;">
+            <h4>⚠️ Transfer Failed or Stuck?</h4>
+            <p>
+              If your transfer fails between confirmation and redemption:
+            </p>
+            <ol>
+              <li>Copy your Solana transaction hash from the failed transfer</li>
+              <li>Go to the <a href="https://portalbridge.com/legacy-tools/#/redeem" target="_blank" rel="noopener noreferrer">Redeem Tab</a></li>
+              <li>Select "Solana" as source chain</li>
+              <li>Paste your transaction hash</li>
+              <li>Click "Recover" to complete the redemption</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Swap Guide -->
+        <div class="swap-guide card">
+          <h2>Swap wCAIMEO → Native CAIMEO</h2>
+          <p>
+            After bridging, you'll receive <strong>wrapped CAIMEO (wCAIMEO)</strong> on Polygon. 
+            To get native CAIMEO, you need to swap 1:1 using our swap contract.
+          </p>
+
+          <h3>Why Swap?</h3>
+          <ul>
+            <li><strong>Native CAIMEO</strong> has cleaner metadata and branding</li>
+            <li><strong>Native CAIMEO</strong> supports ERC-3009 for gasless payments (x402 compatible)</li>
+            <li><strong>Native CAIMEO</strong> is the token used in Uniswap liquidity pools</li>
+          </ul>
+
+          <h3>How to Swap (Manual Method)</h3>
+          <ol>
+            <li>
+              <strong>Approve the Swap Contract</strong><br>
+              Go to the wCAIMEO contract on Polygonscan and approve the native CAIMEO contract to spend your tokens:
+              <ul>
+                <li>Spender: <code>0x86001E1A161eE746A0A2506060d8Fff9C58dd24c</code></li>
+                <li>Amount: Your wCAIMEO balance (or max uint256 for unlimited)</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Call the Swap Function</strong><br>
+              Go to the <a href="https://polygonscan.com/address/0x86001E1A161eE746A0A2506060d8Fff9C58dd24c#writeContract" target="_blank" rel="noopener noreferrer">native CAIMEO contract</a>, 
+              connect your wallet, and call <code>swap(amount)</code> with your wCAIMEO amount (in 6-decimal format).
+            </li>
+          </ol>
+
+          <p style="margin-top: 1rem; color: #888;">
+            <em>Tip: 1 CAIMEO = 1,000,000 in 6-decimal format. So 100 CAIMEO = 100000000.</em>
+          </p>
+        </div>
+
+        <!-- Token Utility -->
+        <div class="token-usage card">
+          <h2>Token Utility</h2>
+          <p>
+            The Caimeo Token ($CAIMEO) powers the Caimeo ecosystem on Polygon, providing utility across multiple dimensions:
+          </p>
+
+          <h3>🎮 Agent Operations</h3>
+          <ul>
+            <li>
+              <strong>Simulation Fees</strong> - Agents use $CAIMEO to register official runs in Agent Games and claim on-chain rewards
+            </li>
+            <li>
+              <strong>Resource Provisioning</strong> - Agents pay for compute credits, TEE usage, and advanced LLM calls in $CAIMEO
+            </li>
+          </ul>
+
+          <h3>🖼️ NFT Synergy</h3>
+          <ul>
+            <li>
+              <strong>Soul Shard Enhancement</strong> - Stake $CAIMEO into Soul Shard NFTs to unlock advanced traits, priority TEE access, or enhanced leveling
+            </li>
+            <li>
+              <strong>Liquidity Incentives</strong> - Shard holders who provide liquidity on Polygon DEXes can earn exclusive NFT badges or in-game items
+            </li>
+          </ul>
+
+          <h3>📈 Conviction Stacking</h3>
+          <p>
+            Rather than traditional buybacks, Caimeo uses <strong>Conviction Stacking</strong> - a transparent, on-chain commitment mechanism:
+          </p>
+          <ul>
+            <li>
+              <strong>Permanent LP Locks</strong> - Project revenue is used to create new <a href="https://value.app" target="_blank" rel="noopener noreferrer">permalocked liquidity positions</a> at various price ranges
+            </li>
+            <li>
+              <strong>Public Commitment</strong> - Each lock is permanent, verifiable on-chain, and earns trading fees for the project
+            </li>
+            <li>
+              <strong>Growing Liquidity</strong> - Over time, the conviction stack builds deeper and deeper liquidity that can never be removed
+            </li>
+          </ul>
+          <p>
+            <a href="https://value.app/#/lock/1?chain=137" target="_blank" rel="noopener noreferrer">View the founder's initial permalock →</a>
+          </p>
+
+          <h3>🔥 Deflationary Mechanics</h3>
+          <ul>
+            <li>
+              <strong>Fee Burning</strong> - A percentage of $CAIMEO used for scenario registration and plugin purchases is burned
+            </li>
+            <li>
+              <strong>Supply Reduction</strong> - Gradual supply reduction creates long-term scarcity
             </li>
           </ul>
         </div>
 
-        <div class="token-usage card">
-          <h2>Future Plans for the Caimeo Token</h2>
-          <p>
-            The Caimeo Token (<em>$CAIMEO</em>) currently resides on Solana with
-            a fixed supply. Below is a roadmap that aims to bring real utility
-            and sustainable value appreciation, all while laying the groundwork
-            for future cross-chain capabilities.
-          </p>
-
-          <ol>
-            <li>
-              <strong>Bridging & Cross-Chain Accessibility</strong>
-              <ul>
-                <li>
-                  <em>Plan A: Wait for AggLayer</em><br />
-                  We anticipate AggLayer's trustless ZK-based bridging for
-                  Solana ↔ Polygon in 2025. Once live, $CAIMEO will seamlessly
-                  move to Polygon or other EVM rollups, enabling
-                  <em>Agents</em> on Polygon to pay fees and earn rewards
-                  directly in $CAIMEO.
-                </li>
-                <li>
-                  <em>Plan B: Interim Bridges</em><br />
-                  If the community supports it sooner, we can explore existing
-                  bridging solutions (e.g., Wormhole) to give $CAIMEO holders a
-                  head start on Polygon or Ethereum. This approach would be less
-                  trust-minimized than AggLayer but might accelerate adoption
-                  and liquidity.
-                </li>
-              </ul>
-            </li>
-
-            <li>
-              <strong>Introducing Token Utility for Agents</strong>
-              <ul>
-                <li>
-                  <em>Simulation Fees & Rewards</em><br />
-                  In upcoming “Agent Games,” Agents will use $CAIMEO to register
-                  official runs and claim on-chain rewards. This creates a
-                  continuous “sink” as Agents consume $CAIMEO for each scenario
-                  entry.
-                </li>
-                <li>
-                  <em>Resource Provisioning</em><br />
-                  Agents may need “compute credits” for TEE usage or advanced
-                  LLM calls—paid in $CAIMEO and burned or partially
-                  redistributed as a reward pool.
-                </li>
-              </ul>
-            </li>
-
-            <li>
-              <strong>NFT + Token Synergy</strong>
-              <ul>
-                <li>
-                  <em>Staking Soul Shards</em><br />
-                  Create a system where Shard holders stake or “lock” $CAIMEO
-                  into their NFT to unlock advanced traits, priority access to
-                  TEE resources, or enhanced leveling speed.
-                </li>
-                <li>
-                  <em>Liquidity Mining for Shard Owners</em><br />
-                  Offer a limited-time LP incentive on Solana DEXes (e.g., Orca)
-                  or bridging platforms. Shard owners who stake tokens +
-                  liquidity can earn exclusive NFT badges or in-game items in
-                  Agent Games.
-                </li>
-              </ul>
-            </li>
-
-            <li>
-              <strong>Deflationary Mechanics & Buyback</strong>
-              <ul>
-                <li>
-                  <em>Buyback Mechanism</em><br />
-                  Allocate a portion of future Caimeo project revenue (NFT
-                  sales, scenario fees, TEE commissions) to periodically buy
-                  $CAIMEO on the open market. This helps stabilize and
-                  potentially elevate prices.
-                </li>
-                <li>
-                  <em>Fee Burning</em><br />
-                  A set % of all $CAIMEO used for scenario registration or
-                  environment plugin purchases could be burned, gradually
-                  reducing supply and adding upward price pressure.
-                </li>
-              </ul>
-            </li>
-
-            <li>
-              <strong>Creator Compensation & Project Financing</strong>
-              <ul>
-                <li>
-                  <em>Token Allocation</em><br />
-                  Founder and dev team can hold a transparent allocation or
-                  vesting schedule. As $CAIMEO volume grows, partial sales can
-                  fund ongoing research and development.
-                </li>
-                <li>
-                  <em>NFT Mint Ties</em><br />
-                  Use a portion of each Soul Shard sale to acquire $CAIMEO from
-                  the market, sending it to a “development treasury.” Once
-                  bridging or utility is in place, these tokens can be sold
-                  responsibly to keep the project alive without massive dumps.
-                </li>
-              </ul>
-            </li>
-          </ol>
-
-          <p>
-            By rolling out these measures in phases, we can gradually boost
-            $CAIMEO’s perceived value, funnel revenue to continued
-            <strong>Caimeo</strong> development, and keep the community engaged
-            with tangible benefits.
-          </p>
-        </div>
-
+        <!-- Disclaimer -->
         <div class="token-disclaimer card">
           <h2>Disclaimer & Important Notes</h2>
           <p>
-            The Caimeo token was created to facilitate specific on-chain AI
-            functionalities and to finance the team's work and research. It
-            should not be viewed as an investment. Key disclaimers:
+            The Caimeo token exists to facilitate on-chain AI functionality and fund ongoing development. 
+            Please read these disclaimers carefully:
           </p>
           <ul>
             <li>
-              <strong>No Immediate Utility:</strong> Currently, $CAIMEO lacks
-              direct usage while bridging and Agglayer support are still in
-              development.
+              <strong>Utility Token:</strong> $CAIMEO is designed for use within the Caimeo ecosystem, not as an investment vehicle
             </li>
             <li>
-              <strong>Speculative Risk:</strong> No expectation of profit or
-              value accrual. Do not purchase $CAIMEO expecting returns.
+              <strong>No Guarantees:</strong> There is no expectation of profit or value appreciation. Do not purchase $CAIMEO expecting returns.
             </li>
             <li>
-              <strong>Non-Investment:</strong> Caimeo’s primary focus is the AI
-              framework and related NFT-based Agents. $CAIMEO exists only for
-              potential AI/agent operations and funding the research and
-              development of the Caimeo Framework.
+              <strong>Development Risk:</strong> Features and timelines are subject to change based on technical and market conditions
             </li>
             <li>
-              <strong>Uncertain Timeline:</strong> We have no fixed deadlines
-              for bridging or final token mechanics; any timeline is subject to
-              change.
+              <strong>Bridge Risk:</strong> Cross-chain bridging carries inherent risks. Always verify addresses and start with small test amounts.
             </li>
           </ul>
         </div>
 
         <div class="warning-box">
           <p>
-            <strong>Notice:</strong> Purchasing or holding $CAIMEO confers no
-            rights or guarantees. This token is not an investment vehicle.
-            Participate only if you wish to experiment with future Caimeo Agents
-            functionality on Solana or cross-chain solutions.
+            <strong>Notice:</strong> Purchasing or holding $CAIMEO confers no rights or guarantees. 
+            Participate only if you wish to engage with the Caimeo Agents ecosystem on Polygon.
           </p>
         </div>
+
       </section>
     </div>
 
@@ -300,7 +363,7 @@
           </a>
         </div>
       </div>
-      <p>© 2024 Caimeo. All rights reserved.</p>
+      <p>© 2026 Caimeo. All rights reserved.</p>
     </footer>
 
     <script type="module" src="main.js"></script>

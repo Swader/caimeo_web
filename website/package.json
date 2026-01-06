@@ -1,0 +1,12 @@
+{
+  "name": "caimeo-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "bun run build.ts",
+    "dev": "bun run dev.ts",
+    "serve": "bun run serve.ts"
+  }
+}
+
+

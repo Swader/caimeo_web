@@ -149,7 +149,7 @@ The landing page and documentation for the Caimeo project, built with:
 
 - Pure HTML/CSS/TypeScript
 - No frontend frameworks
-- Deno for build and development
+- Bun for build and development
 - Local-first development principles
 
 ### Smart Contracts (`/crypto`)
@@ -175,12 +175,15 @@ You can connect to the mocked blockchain using MetaMask by connecting to `http:/
 ### Website
 
 ```bash
-# Build the website
+# Dev server (builds to /website/dist and rebuilds on change)
 cd website
-deno task build
+bun run dev
 
-# Serve locally
-deno task serve
+# One-off static build (outputs to /website/dist)
+bun run build
+
+# Serve the built /website/dist locally (no rebuild)
+bun run serve
 ```
 
 ## License
